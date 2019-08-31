@@ -1,5 +1,9 @@
 
 FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
+
+
+
+
 .identificar links de cada rodada (x)
 .numero da rodada (v)
 .links da ficha de cada jogo da rodada (v)

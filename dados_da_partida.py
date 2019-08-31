@@ -5,7 +5,7 @@ from Enum.Meses import qualMes
 from funcoes.funcoes import dia_da_semana
 import datetime
 
-page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/vasco/sao-paulo/2989071/1/live")
+page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/cruzeiro/santos/2989057/1/live")
 soup = BeautifulSoup(page.content, 'html.parser')
 
 
@@ -13,9 +13,9 @@ estatisticas = soup.find("table", class_="match_stats_center")
 cartao_vermelho = estatisticas.find(class_="red_cards")
 segundo_amarelo = estatisticas.find(class_="yellow_red_cards")
 
-
-###VERIFICACAO DE CARTÃO DO PRIMEIRO MODO POR MEIO DAS ESTATISTICAS (VERIFICAR DE OUTRO MODO (VASCO E SAO PAULO))
+###VERIFICACAO DE CARTÃO DO PRIMEIRO MODO POR MEIO DAS ESTATISTICAS
 if((cartao_vermelho) and (segundo_amarelo)):
+    teve_cartao_vermelho = True
     print('cartao vermelho e segundo amarelo no mesmo jogo')
     cartao_vermelho_casa = int(cartao_vermelho.find(class_="stat_value_number_team_A").get_text().strip())
     cartao_vermelho_visitante = int(cartao_vermelho.find(class_="stat_value_number_team_B").get_text().strip())
@@ -24,18 +24,71 @@ if((cartao_vermelho) and (segundo_amarelo)):
     segundo_amarelo_visitante = int(segundo_amarelo.find(class_="stat_value_number_team_B").get_text().strip())
 
 elif((cartao_vermelho)):
+    teve_cartao_vermelho = True
     print('cartao vermelho direto')
     cartao_vermelho_casa = int(cartao_vermelho.find(class_="stat_value_number_team_A").get_text().strip())
     cartao_vermelho_visitante = int(cartao_vermelho.find(class_="stat_value_number_team_B").get_text().strip())
 elif((segundo_amarelo)):
+    teve_cartao_vermelho = True
     print('segundo amarelo e expulsao')
     segundo_amarelo_casa = int(segundo_amarelo.find(class_="stat_value_number_team_A").get_text().strip())
     segundo_amarelo_visitante = int(segundo_amarelo.find(class_="stat_value_number_team_B").get_text().strip())
 else:
+    teve_cartao_vermelho = False
     print('nao houve expulsao nesse jogo')
 
+if(teve_cartao_vermelho):
+    sumario = soup.find_all(class_="stat-quarts-padding")
+    trs = []
+    for evento in sumario:
+        tr = evento.find_all("tr")
+        trs.append(tr)
 
+    
+    lista_teste = []
+    indice1 = 0
+    indice2 = 0
+    for tr in trs:
+        for td in tr:
+            tds = td.find_all("td", class_="match-sum-wd-symbol")
+            for dado in tds:
+                cartao_v = dado.find("span", class_="aa-icon-RC")
+                if(cartao_v):
+                    qual_quarts = indice1
+                    qual_tr = indice2
+                    #print(cartao_v)
+                    #print('INDICE', indice)
+                    #print('-----------------')
+            #dicionario[indice] = tds
+            #print(tds)
+            #print('QUAL TR', indice)
+            #print('-----------------')
+            indice2 += 1
+        indice1 += 1
 
+    cod = trs[qual_quarts][qual_tr]
+    minuto_duplicado = cod.find_all(class_="match-sum-wd-minute")
+    for minuto in minuto_duplicado:
+        minuto = minuto.get_text().strip()
+        if(minuto != ''):
+            minuto = minuto.replace("'",'')
+            print(minuto)
+    #print(minuto)
+
+    #print(dicionario)
+    #     print(tr)
+    #     print('---------------')
+        #tds = tr.find_all("td")
+        #print(tds)
+        #print('------------------')
+        #print(trs)
+        #print('--------')
+        #lista = sumario.find("span")
+    #icon_cv = sumario.find_all(class_="ico aa-icon-RC")
+    #print(lista)
+    #print(sumario)
+    #print('-------')
+    #print(trs)
 
 
 #print(cartao_vermelho_casa)
