@@ -56,42 +56,6 @@ escanteios = estatisticas.find("tr", class_="corners")
 escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
 escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
 
-
-print('POSSE DE BOLA')
-print(posse_time_a)
-print(posse_time_b)
-
-print('CHUTES A GOL')
-print(chutes_a_gol_time_a)
-print(chutes_a_gol_time_b)
-
-print('CHUTES FORA')
-print(chutes_fora_time_a)
-print(chutes_fora_time_b)
-
-print('ATAQUES')
-print(ataques_time_a)
-print(ataques_time_b)
-
-print('ATAQUES PERIGOSOS')
-print(ataques_perigosos_time_a)
-print(ataques_perigosos_time_b)
-
-print('IMPEDIMENTOS')
-print(impedimentos_time_a)
-print(impedimentos_time_b)
-
-print('FALTAS')
-print(faltas_time_a)
-print(faltas_time_b)
-
-print('ESCANTEIOS')
-print(escanteios_time_a)
-print(escanteios_time_b)
-
-
-
-
 ##Identificar expulsoes
 time_a = soup.find(id="team_A_")
 time_b = soup.find(id="team_B_")
@@ -152,7 +116,12 @@ else:
 dia_semana= dia_da_semana(ano,mes,dia)
 
 
-'''
+
+
+print(minutos_expulsoes_time_a)
+print(minutos_expulsoes_time_b)
+
+
 print(time_dentro)
 print(time_fora)
 print(resultado_final)
@@ -162,4 +131,20 @@ print(data_do_jogo)
 print(horario)
 print(turno)
 print(dia_semana)
-'''
+
+print(posse_time_a)
+print(posse_time_b)
+print(chutes_a_gol_time_a)
+print(chutes_a_gol_time_b)
+print(chutes_fora_time_a)
+print(chutes_fora_time_b)
+print(ataques_time_a)
+print(ataques_time_b)
+print(ataques_perigosos_time_a)
+print(ataques_perigosos_time_b)
+print(impedimentos_time_a)
+print(impedimentos_time_b)
+print(faltas_time_a)
+print(faltas_time_b)
+print(escanteios_time_a)
+print(escanteios_time_b)
