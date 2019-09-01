@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 
 from Enum.Meses import qualMes
-from funcoes.funcoes import dia_da_semana
+from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto
 import datetime
 
-page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/cruzeiro/santos/2989057/1/live")
+page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/sao-paulo/gremio/2989080/1/live")
 soup = BeautifulSoup(page.content, 'html.parser')
 
 
@@ -37,67 +37,44 @@ else:
     teve_cartao_vermelho = False
     print('nao houve expulsao nesse jogo')
 
-if(teve_cartao_vermelho):
-    sumario = soup.find_all(class_="stat-quarts-padding")
-    trs = []
-    for evento in sumario:
-        tr = evento.find_all("tr")
-        trs.append(tr)
-
-    
-    lista_teste = []
-    indice1 = 0
-    indice2 = 0
-    for tr in trs:
-        for td in tr:
-            tds = td.find_all("td", class_="match-sum-wd-symbol")
-            for dado in tds:
-                cartao_v = dado.find("span", class_="aa-icon-RC")
-                if(cartao_v):
-                    qual_quarts = indice1
-                    qual_tr = indice2
-                    #print(cartao_v)
-                    #print('INDICE', indice)
-                    #print('-----------------')
-            #dicionario[indice] = tds
-            #print(tds)
-            #print('QUAL TR', indice)
-            #print('-----------------')
-            indice2 += 1
-        indice1 += 1
-
-    cod = trs[qual_quarts][qual_tr]
-    minuto_duplicado = cod.find_all(class_="match-sum-wd-minute")
-    for minuto in minuto_duplicado:
-        minuto = minuto.get_text().strip()
-        if(minuto != ''):
-            minuto = minuto.replace("'",'')
-            print(minuto)
-    #print(minuto)
-
-    #print(dicionario)
-    #     print(tr)
-    #     print('---------------')
-        #tds = tr.find_all("td")
-        #print(tds)
-        #print('------------------')
-        #print(trs)
-        #print('--------')
-        #lista = sumario.find("span")
-    #icon_cv = sumario.find_all(class_="ico aa-icon-RC")
-    #print(lista)
-    #print(sumario)
-    #print('-------')
-    #print(trs)
 
 
-#print(cartao_vermelho_casa)
-#print(cartao_vermelho_visitante)
+time_a = soup.find(id="team_A_")
+icone_segundo_amarelo = time_a.find_all(class_="event aa-icon-Y2C")
+icone_vermelho_direto = time_a.find_all(class_="event aa-icon-RC")
 
-#print(segundo_amarelo)
-#print(segundo_amarelo_casa)
-#print(segundo_amarelo_visitante)
-#print(cartao_vermelho)
+
+minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(icone_segundo_amarelo)
+minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(icone_vermelho_direto)
+minutos_expulsoes = minutos_seg_amarelo + minutos_ver_direto
+
+time_b = soup.find(id="team_B_")
+icone_segundo_amarelo = time_b.find_all(class_="event aa-icon-Y2C")
+icone_vermelho_direto = time_b.find_all(class_="event aa-icon-RC")
+
+minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(icone_segundo_amarelo)
+minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(icone_vermelho_direto)
+minutos_expulsoes += minutos_seg_amarelo + minutos_ver_direto
+
+
+# for seg_amarelo in icone_segundo_amarelo:
+#     seg_amarelo_results_string = str(seg_amarelo).replace('tr&gt;','').replace('th&gt;','').replace('td&gt;','').replace('&lt;','').replace('&gt','').replace('/','').replace(';','').replace('span','').replace('undermark','').replace('overermark','').replace('class=','').replace('\""','').replace('+','').replace('.','')
+#     seg_amarelo_results_string_split = seg_amarelo_results_string.split()
+#     indice = seg_amarelo_results_string_split.index("aa-icon-Y2C'")
+#     minuto = seg_amarelo_results_string_split[indice+4]
+#     minuto = int(minuto.replace("'",''))
+#     minutos_expulsoes.append(minuto)
+
+# for ver_direto in icone_vermelho_direto:
+#     ver_direto_results_string = str(ver_direto).replace('tr&gt;','').replace('th&gt;','').replace('td&gt;','').replace('&lt;','').replace('&gt','').replace('/','').replace(';','').replace('span','').replace('undermark','').replace('overermark','').replace('class=','').replace('\""','').replace('+','').replace('.','')
+#     ver_direto_results_string_split = ver_direto_results_string.split()
+#     indice = ver_direto_results_string_split.index("aa-icon-RC'")
+#     minuto = ver_direto_results_string_split[indice+4]
+#     minuto = int(minuto.replace("'",''))
+#     minutos_expulsoes.append(minuto)
+
+print(minutos_expulsoes)
+
 
 
 

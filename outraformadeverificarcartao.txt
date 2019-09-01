@@ -1,0 +1,64 @@
+#if(teve_cartao_vermelho):
+
+'''
+    sumario = soup.find_all(class_="stat-quarts-padding")
+    trs = []
+    for evento in sumario:
+        tr = evento.find_all("tr")
+        trs.append(tr)
+
+    
+    lista_teste = []
+    indice1 = 0
+    indice2 = 0
+    for tr in trs:
+        for td in tr:
+            tds = td.find_all("td", class_="match-sum-wd-symbol")
+            for dado in tds:
+                cartao_v = dado.find("span", class_="aa-icon-RC")
+                if(cartao_v):
+                    qual_quarts = indice1
+                    qual_tr = indice2
+                    #print(cartao_v)
+                    #print('INDICE', indice)
+                    #print('-----------------')
+            #dicionario[indice] = tds
+            #print(tds)
+            # #print('QUAL TR', indice)
+            #print('-----------------')
+            indice2 += 1
+        indice1 += 1
+
+    cod = trs[qual_quarts][qual_tr]
+    minuto_duplicado = cod.find_all(class_="match-sum-wd-minute")
+    for minuto in minuto_duplicado:
+        minuto = minuto.get_text().strip()
+        if(minuto != ''):
+            minuto = minuto.replace("'",'')
+            print(minuto)
+    #print(minuto)
+
+    #print(dicionario)
+    #     print(tr)
+    #     print('---------------')
+        #tds = tr.find_all("td")
+        #print(tds)
+        #print('------------------')
+        #print(trs)
+        #print('--------')
+        #lista = sumario.find("span")
+    #icon_cv = sumario.find_all(class_="ico aa-icon-RC")
+    #print(lista)
+    #print(sumario)
+    #print('-------')
+    #print(trs)
+
+
+#print(cartao_vermelho_casa)
+#print(cartao_vermelho_visitante)
+
+#print(segundo_amarelo)
+#print(segundo_amarelo_casa)
+#print(segundo_amarelo_visitante)
+#print(cartao_vermelho)
+'''

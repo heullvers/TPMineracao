@@ -20,6 +20,8 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 
 .últimos 5 jogos (V/D/E) (x)
 .tempo em que foi levado o cartao (x)
+.time da casa ou visitiante que levou cartao
+.qtd_cartoes
 .estatisticas (x)
 	-posse de bola (x)
 	-chutes a gol (x)
