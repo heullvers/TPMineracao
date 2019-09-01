@@ -2,10 +2,28 @@ import requests
 from bs4 import BeautifulSoup
 
 #page do campeonato brasileiro 2019 na 15ª rodada.
-page = requests.get("https://www.academiadasapostasbrasil.com/stats/competition/brasil-stats/26/16888/51143/0/21")
+page = requests.get("https://www.academiadasapostasbrasil.com/stats/competition/inglaterra-stats/8/17429/53145/0/4")
 
 
 soup = BeautifulSoup(page.content, 'html.parser')
+
+##OBTER NOME CAMPEONATO
+campeonato = soup.find("p", class_="competition-title")
+campeonato = campeonato.find("span").get_text()
+campeonato = campeonato.split(' ')
+
+nome_campeonato = ''
+
+for i in range(len(campeonato) - 1):
+    nome_campeonato += campeonato[i] + ' '
+
+nome_campeonato = nome_campeonato.rstrip()
+
+##OBTER TEMPORADA
+temporada = campeonato[len(campeonato)-1]
+
+##OBTER PAÍS
+pais = soup.find("p", class_="competition-subtitle").get_text()
 
 ##OBTER NUMERO DA RODADA
 rodada = soup.find("td", id="week-gr")
@@ -24,7 +42,6 @@ for partida in tabela:
     if(aux == 8):
         aux = 1
     elif(aux == 7):
-        #print(partida)
         link = partida.find("a").get("href")
         icone = partida.find("span", class_="aa-icon-player")
         if(icone): #verificando se existe a ficha de jogo
@@ -33,5 +50,11 @@ for partida in tabela:
     else:
         aux += 1
 
+'''
+print(nome_campeonato)
+print(temporada)
+print(pais)
+print(rodada)
 print(link_ficha_de_jogo)
+'''
 ###############################################################

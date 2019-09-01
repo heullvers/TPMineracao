@@ -5,11 +5,94 @@ from Enum.Meses import qualMes
 from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto
 import datetime
 
-page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/avai/corinthians/2989073/1/live")
+page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/inglaterra-stats/barclays-premier-league/southampton/manchester-united/3029111/1/live")
 soup = BeautifulSoup(page.content, 'html.parser')
 
 estatisticas = soup.find("table", class_="match_stats_center")
 
+##Posse de bola
+posse = estatisticas.find("tr", class_="possession")
+posse_time_a = int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))
+posse_time_b = int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))
+
+##Chutes a gol
+chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
+chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
+chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+##Chutes fora
+#shots_off_target
+chutes_fora = estatisticas.find("tr", class_="shots_off_target")
+chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
+chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+##Ataques
+#attacks
+ataques = estatisticas.find("tr", class_="attacks")
+ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
+ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+##Ataques perigosos
+#dangerous_attacks
+ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
+ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
+ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+##Impedimentos
+#offsides
+impedimentos = estatisticas.find("tr", class_="offsides")
+impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
+impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+##Faltas
+#fouls
+faltas = estatisticas.find("tr", class_="fouls")
+faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
+faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+##Escanteios
+#corners
+escanteios = estatisticas.find("tr", class_="corners")
+escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
+escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
+
+
+print('POSSE DE BOLA')
+print(posse_time_a)
+print(posse_time_b)
+
+print('CHUTES A GOL')
+print(chutes_a_gol_time_a)
+print(chutes_a_gol_time_b)
+
+print('CHUTES FORA')
+print(chutes_fora_time_a)
+print(chutes_fora_time_b)
+
+print('ATAQUES')
+print(ataques_time_a)
+print(ataques_time_b)
+
+print('ATAQUES PERIGOSOS')
+print(ataques_perigosos_time_a)
+print(ataques_perigosos_time_b)
+
+print('IMPEDIMENTOS')
+print(impedimentos_time_a)
+print(impedimentos_time_b)
+
+print('FALTAS')
+print(faltas_time_a)
+print(faltas_time_b)
+
+print('ESCANTEIOS')
+print(escanteios_time_a)
+print(escanteios_time_b)
+
+
+
+
+##Identificar expulsoes
 time_a = soup.find(id="team_A_")
 time_b = soup.find(id="team_B_")
 
@@ -20,23 +103,6 @@ minutos_expulsoes_time_a = minutos_seg_amarelo + minutos_ver_direto
 minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(time_b)
 minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(time_b)
 minutos_expulsoes_time_b = minutos_seg_amarelo + minutos_ver_direto
-
-print(minutos_expulsoes_time_a)
-print(minutos_expulsoes_time_b)
-    #minutos_expulsoes = minutos_seg_amarelo + minutos_ver_direto
-
-
-    # time_b = soup.find(id="team_B_")
-    # icone_segundo_amarelo = time_b.find_all(class_="event aa-icon-Y2C")
-    # icone_vermelho_direto = time_b.find_all(class_="event aa-icon-RC")
-    # minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(icone_segundo_amarelo)
-    # minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(icone_vermelho_direto)
-    # minutos_expulsoes += minutos_seg_amarelo + minutos_ver_direto
-
-#print(minutos_expulsoes)
-
-
-
 
 
 dados_gerais_da_partida = soup.find("div", "stats-game-head")
@@ -84,3 +150,16 @@ else:
 
 ##Dia da semana
 dia_semana= dia_da_semana(ano,mes,dia)
+
+
+'''
+print(time_dentro)
+print(time_fora)
+print(resultado_final)
+print(gols_mandante)
+print(gols_visitante)
+print(data_do_jogo)
+print(horario)
+print(turno)
+print(dia_semana)
+'''

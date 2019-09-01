@@ -3,8 +3,11 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 
 
 
-
+.identificar campeonatos (x)
 .identificar links de cada rodada (x)
+.campeonato (v)
+.temporada (v)
+.pais (v)
 .numero da rodada (v)
 .links da ficha de cada jogo da rodada (v)
 --------
@@ -22,19 +25,15 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 .tempo em que foi levado o cartao (v)
 .time da casa ou visitiante que levou cartao (v)
 .qtd_cartoes (v)
-.estatisticas (x)
-	-posse de bola (x)
-	-chutes a gol (x)
-	-chutes na trave (x)
-	-chutes pra fora (x)
-	-ataques (x)
-	-ataques perigosos (x)
-	-impedimentos (x)
-	-cartoes amarelos (x)
-	-faltas (x)
-	-tiros de meta (x)
-	-laterais (x)
-	-escanteios (x)
+.estatisticas (v)
+	-posse de bola (v)
+	-chutes a gol (v)
+	-chutes pra fora (v)
+	-ataques (v)
+	-ataques perigosos (v)
+	-impedimentos (v)
+	-faltas (v)
+	-escanteios (v)
 .posicao atual na tabela (x)
 .odds antes e se possivel apos a expulsao (x)
 
