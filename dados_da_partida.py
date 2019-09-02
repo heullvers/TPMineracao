@@ -5,56 +5,13 @@ from Enum.Meses import qualMes
 from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto
 import datetime
 
-page = requests.get("https://www.academiadasapostasbrasil.com/stats/match/inglaterra-stats/barclays-premier-league/southampton/manchester-united/3029111/1/live")
+link = "https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/vasco/flamengo/2989061/1/live"
+page = requests.get(link)
 soup = BeautifulSoup(page.content, 'html.parser')
 
-estatisticas = soup.find("table", class_="match_stats_center")
 
-##Posse de bola
-posse = estatisticas.find("tr", class_="possession")
-posse_time_a = int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))
-posse_time_b = int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))
-
-##Chutes a gol
-chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
-chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
-chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
-
-##Chutes fora
-#shots_off_target
-chutes_fora = estatisticas.find("tr", class_="shots_off_target")
-chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
-chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
-
-##Ataques
-#attacks
-ataques = estatisticas.find("tr", class_="attacks")
-ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
-ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
-
-##Ataques perigosos
-#dangerous_attacks
-ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
-ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
-ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
-
-##Impedimentos
-#offsides
-impedimentos = estatisticas.find("tr", class_="offsides")
-impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
-impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
-
-##Faltas
-#fouls
-faltas = estatisticas.find("tr", class_="fouls")
-faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
-faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
-
-##Escanteios
-#corners
-escanteios = estatisticas.find("tr", class_="corners")
-escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
-escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
+dados_gerais_da_partida = soup.find("div", "stats-game-head")
+dados_gerais_da_partida = dados_gerais_da_partida.find_all("td")
 
 ##Identificar expulsoes
 time_a = soup.find(id="team_A_")
@@ -67,10 +24,6 @@ minutos_expulsoes_time_a = minutos_seg_amarelo + minutos_ver_direto
 minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(time_b)
 minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(time_b)
 minutos_expulsoes_time_b = minutos_seg_amarelo + minutos_ver_direto
-
-
-dados_gerais_da_partida = soup.find("div", "stats-game-head")
-dados_gerais_da_partida = dados_gerais_da_partida.find_all("td")
 
 ### Descobrir time mandante e visitante
 time_dentro = dados_gerais_da_partida[0].find_all("a")
@@ -115,9 +68,159 @@ else:
 ##Dia da semana
 dia_semana= dia_da_semana(ano,mes,dia)
 
+estatisticas = soup.find("table", class_="match_stats_center")
+##Posse de bola
+posse = estatisticas.find("tr", class_="possession")
+if(posse):
+    posse_time_a = int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))
+    posse_time_b = int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))
+else:
+    posse_time_a = None
+    posse_time_b = None
+
+##Chutes a gol
+chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
+if(chutes_a_gol):
+    chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
+    chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    chutes_a_gol_time_a = None
+    chutes_a_gol_time_b = None
+
+##Chutes fora
+#shots_off_target
+chutes_fora = estatisticas.find("tr", class_="shots_off_target")
+if(chutes_fora):
+    chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
+    chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    chutes_fora_time_a = None
+    chutes_fora_time_b = None
+
+##Ataques
+#attacks
+ataques = estatisticas.find("tr", class_="attacks")
+if(ataques):
+    ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
+    ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    ataques_time_a = None
+    ataques_time_b = None
+
+##Ataques perigosos
+#dangerous_attacks
+ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
+if(ataques_perigosos):
+    ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
+    ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    ataques_perigosos_time_a = None
+    ataques_perigosos_time_b = None
+
+##Impedimentos
+#offsides
+impedimentos = estatisticas.find("tr", class_="offsides")
+if(impedimentos):
+    impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
+    impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    impedimentos_time_a = None
+    impedimentos_time_b = None
+
+##Faltas
+#fouls
+faltas = estatisticas.find("tr", class_="fouls")
+if(faltas):
+    faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
+    faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    faltas_time_a = None
+    faltas_time_b = None
+
+##Escanteios
+#corners
+escanteios = estatisticas.find("tr", class_="corners")
+if(escanteios):
+    escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
+    escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
+else:
+    escanteios_time_a = None
+    escanteios_time_b = None
+
+##Estatisticas outra aba
+link = link.replace("live", "prelive")
+page = requests.get(link)
+soup = BeautifulSoup(page.content, 'html.parser')
+
+estatisticas_aprofundadas = soup.find(id="ultimos_resultados")
+
+###Ajustar para receber essas variáveis da ficha de jogo
+times = estatisticas_aprofundadas.find_all(class_="stats-subtitle")
+time_casa = times[0].get_text()
+time_visitante = times[1].get_text()
+
+tabelas_jogos = estatisticas_aprofundadas.find_all("table", class_="stat-last10 stat-half-padding")
+trs = []
+for tabela in tabelas_jogos:
+    trs.append(tabela.find_all("tr"))
+
+vitorias = []
+empates = []
+derrotas = []
+ultimos_jogos_time_casa = trs[0]
+ultimos_jogos_time_visitante = trs[1]
+
+
+resultados_time_casa = []
+resultados_time_visitante = []
+
+
+for i in range(1,6):
+    vitoria = ultimos_jogos_time_casa[i].find(class_="stat-win")
+    empate = ultimos_jogos_time_casa[i].find(class_="stat-draw")
+    derrota = ultimos_jogos_time_casa[i].find(class_="stat-lose")
+
+    if(vitoria):
+        resultados_time_casa.append('V')
+    elif(empate):
+        resultados_time_casa.append('E')
+    else:
+        resultados_time_casa.append('D')
+
+ultimo_jogo_casa = resultados_time_casa[0]
+segundo_ultimo_jogo_casa = resultados_time_casa[1]
+terceiro_ultimo_jogo_casa = resultados_time_casa[2]
+quarto_ultimo_jogo_casa = resultados_time_casa[3]
+quinto_ultimo_jogo_casa = resultados_time_casa[4]
+
+for i in range(1,6):
+    vitoria = ultimos_jogos_time_visitante[i].find(class_="stat-win")
+    empate = ultimos_jogos_time_visitante[i].find(class_="stat-draw")
+    derrota = ultimos_jogos_time_visitante[i].find(class_="stat-lose")
+
+    if(vitoria):
+        resultados_time_visitante.append('V')
+    elif(empate):
+        resultados_time_visitante.append('E')
+    else:
+        resultados_time_visitante.append('D')
+
+ultimo_jogo_visitante = resultados_time_visitante[0]
+segundo_ultimo_jogo_visitante = resultados_time_casa[1]
+terceiro_ultimo_jogo_visitante = resultados_time_casa[2]
+quarto_ultimo_jogo_visitante = resultados_time_casa[3]
+quinto_ultimo_jogo_visitante = resultados_time_casa[4]
 
 
 
+print(resultados_time_casa)
+print(resultados_time_visitante)
+
+
+
+
+
+'''
 print(minutos_expulsoes_time_a)
 print(minutos_expulsoes_time_b)
 
@@ -148,3 +251,4 @@ print(faltas_time_a)
 print(faltas_time_b)
 print(escanteios_time_a)
 print(escanteios_time_b)
+'''
