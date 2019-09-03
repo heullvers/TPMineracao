@@ -21,7 +21,7 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 .turno (v)
 .dia da semana (v)
 
-.últimos 5 jogos (V/D/E) (x)
+.últimos 5 jogos (V/D/E) (v)
 .tempo em que foi levado o cartao (v)
 .time da casa ou visitiante que levou cartao (v)
 .qtd_cartoes (v)
@@ -34,6 +34,6 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 	-impedimentos (v)
 	-faltas (v)
 	-escanteios (v)
-.posicao atual na tabela (x)
+.posicao atual na tabela (v)
 .odds antes e se possivel apos a expulsao (x)
 

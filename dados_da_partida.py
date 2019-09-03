@@ -5,7 +5,7 @@ from Enum.Meses import qualMes
 from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto
 import datetime
 
-link = "https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/vasco/flamengo/2989061/1/live"
+link = "https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/fortaleza/goias/2989078/1/live"
 page = requests.get(link)
 soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -159,6 +159,7 @@ times = estatisticas_aprofundadas.find_all(class_="stats-subtitle")
 time_casa = times[0].get_text()
 time_visitante = times[1].get_text()
 
+###Identificar histórico dos últimos 5 jogos do time mandante e visitante
 tabelas_jogos = estatisticas_aprofundadas.find_all("table", class_="stat-last10 stat-half-padding")
 trs = []
 for tabela in tabelas_jogos:
@@ -206,15 +207,38 @@ for i in range(1,6):
         resultados_time_visitante.append('D')
 
 ultimo_jogo_visitante = resultados_time_visitante[0]
-segundo_ultimo_jogo_visitante = resultados_time_casa[1]
-terceiro_ultimo_jogo_visitante = resultados_time_casa[2]
-quarto_ultimo_jogo_visitante = resultados_time_casa[3]
-quinto_ultimo_jogo_visitante = resultados_time_casa[4]
+segundo_ultimo_jogo_visitante = resultados_time_visitante[1]
+terceiro_ultimo_jogo_visitante = resultados_time_visitante[2]
+quarto_ultimo_jogo_visitante = resultados_time_visitante[3]
+quinto_ultimo_jogo_visitante = resultados_time_visitante[4]
+
+
+##Identificar posição atual na tabela do time mandante e visitante
+classificacao = soup.find("table", class_="results competition-rounds competition-half-padding")
+posicao_atual_time_dentro = classificacao.find("tr", {"style":"background-color: #CDDFF0"})
+posicao_atual_time_dentro = int(posicao_atual_time_dentro.find("td").get_text().strip())
+
+posicao_atual_time_fora = classificacao.find("tr",{"style":"background-color: #FFE0A6"})
+posicao_atual_time_fora = int(posicao_atual_time_fora.find("td").get_text().strip())
+
+
+##Identificar odds pré-jogo
+odds = soup.find("table", class_="stats-group odds full odds_MO")
+odds = odds.find(class_="even")
+odds = odds.find_all(class_="odd-B")
+
+todas_odds = []
+for odd in odds:
+    todas_odds.append(float(odd.get_text().strip()))
+
+odd_time_casa = todas_odds[0]
+odd_empate = todas_odds[1]
+odd_time_fora = todas_odds[2]
 
 
 
-print(resultados_time_casa)
-print(resultados_time_visitante)
+
+
 
 
 
@@ -251,4 +275,23 @@ print(faltas_time_a)
 print(faltas_time_b)
 print(escanteios_time_a)
 print(escanteios_time_b)
+
+print(ultimo_jogo_casa)
+print(segundo_ultimo_jogo_casa)
+print(terceiro_ultimo_jogo_casa)
+print(quarto_ultimo_jogo_casa)
+print(quinto_ultimo_jogo_casa)
+
+print(ultimo_jogo_visitante)
+print(segundo_ultimo_jogo_visitante)
+print(terceiro_ultimo_jogo_visitante)
+print(quarto_ultimo_jogo_visitante)
+print(quinto_ultimo_jogo_visitante)
+
+print(posicao_time_dentro)
+print(posicao_time_fora)
+
+print(odd_time_casa)
+print(odd_empate)
+print(odd_time_fora)
 '''
