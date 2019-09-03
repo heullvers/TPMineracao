@@ -154,11 +154,6 @@ soup = BeautifulSoup(page.content, 'html.parser')
 
 estatisticas_aprofundadas = soup.find(id="ultimos_resultados")
 
-###Ajustar para receber essas variáveis da ficha de jogo
-times = estatisticas_aprofundadas.find_all(class_="stats-subtitle")
-time_casa = times[0].get_text()
-time_visitante = times[1].get_text()
-
 ###Identificar histórico dos últimos 5 jogos do time mandante e visitante
 tabelas_jogos = estatisticas_aprofundadas.find_all("table", class_="stat-last10 stat-half-padding")
 trs = []
@@ -236,7 +231,42 @@ odd_empate = todas_odds[1]
 odd_time_fora = todas_odds[2]
 
 
+##Mais algumas estatisticas
+estatist = soup.find("tbody", class_="ajax-container")
+##CAPTURAR MOMENTO DOS GOLS A PARTIR DAQUI
+estatist = estatist.find_all("table", class_="stat-seqs stat-half-padding")
+estatist_time_casa = estatist[0]
+estatist_time_casa = estatist_time_casa.find("tbody")
+estatist_time_casa = estatist_time_casa.find_all("tr")
 
+medias = []
+for linha in estatist_time_casa:
+    tds = linha.find_all("td")
+    valores = []
+    for td in tds:
+        valores.append(td.get_text().strip())
+    medias.append(valores)
+
+media_gols_marcados_por_jogo_time_casa_em_casa = float(medias[0][1])
+media_gols_marcados_por_jogo_time_casa_fora = float(medias[0][2])
+media_gols_marcados_por_jogo_time_casa_global = float(medias[0][3])
+
+    
+print(medias)
+print(media_gols_marcados_por_jogo_time_casa_em_casa)
+print(media_gols_marcados_por_jogo_time_casa_fora)
+print(media_gols_marcados_por_jogo_time_casa_global)
+#print(estatist_time_casa)
+
+
+# estatist = estatist.find_all("table", class_="stat-seqs stat-half-padding")
+
+# estatist_time_casa = estatist[0]
+# estatist_time_visitante = estatist[1]
+
+# estatist_time_casa = estatist_time_casa.find("tbody")
+
+#print(estatist_time_casa)
 
 
 

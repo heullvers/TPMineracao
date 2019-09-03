@@ -35,5 +35,5 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 	-faltas (v)
 	-escanteios (v)
 .posicao atual na tabela (v)
-.odds antes e se possivel apos a expulsao (x)
+.odds antes (x)
 
