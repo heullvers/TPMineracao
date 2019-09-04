@@ -5,6 +5,8 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 
 .identificar campeonatos (x)
 .identificar links de cada rodada (x)
+.verificar coleta de dados nos anos anteriores a 2010 (brasileiro) e verificar em outros campeonatos (x)
+
 .campeonato (v)
 .temporada (v)
 .pais (v)
@@ -35,5 +37,5 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 	-faltas (v)
 	-escanteios (v)
 .posicao atual na tabela (v)
-.odds antes (x)
+.odds antes (v)
 
