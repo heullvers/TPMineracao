@@ -72,8 +72,8 @@ estatisticas = soup.find("table", class_="match_stats_center")
 ##Posse de bola
 posse = estatisticas.find("tr", class_="possession")
 if(posse):
-    posse_time_a = int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))
-    posse_time_b = int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))
+    posse_time_a = (int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))) / 100
+    posse_time_b = (int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))) / 100
 else:
     posse_time_a = None
     posse_time_b = None
@@ -236,9 +236,15 @@ estatist = soup.find("tbody", class_="ajax-container")
 ##CAPTURAR MOMENTO DOS GOLS A PARTIR DAQUI
 estatist = estatist.find_all("table", class_="stat-seqs stat-half-padding")
 estatist_time_casa = estatist[0]
+estatist_time_fora = estatist[1]
+
 estatist_time_casa = estatist_time_casa.find("tbody")
 estatist_time_casa = estatist_time_casa.find_all("tr")
 
+estatist_time_fora = estatist_time_fora.find("tbody")
+estatist_time_fora = estatist_time_fora.find_all("tr")
+
+### TIME CASA
 medias = []
 for linha in estatist_time_casa:
     tds = linha.find_all("td")
@@ -251,29 +257,158 @@ media_gols_marcados_por_jogo_time_casa_em_casa = float(medias[0][1])
 media_gols_marcados_por_jogo_time_casa_fora = float(medias[0][2])
 media_gols_marcados_por_jogo_time_casa_global = float(medias[0][3])
 
-    
-print(medias)
-print(media_gols_marcados_por_jogo_time_casa_em_casa)
-print(media_gols_marcados_por_jogo_time_casa_fora)
-print(media_gols_marcados_por_jogo_time_casa_global)
-#print(estatist_time_casa)
+media_gols_sofridos_por_jogo_time_casa_em_casa = float(medias[1][1])
+media_gols_sofridos_por_jogo_time_casa_fora = float(medias[1][2])
+media_gols_sofridos_por_jogo_time_casa_global = float(medias[1][3])
+
+media_gols_marcados_sofridos_por_jogo_time_casa_em_casa = float(medias[2][1])
+media_gols_marcados_sofridos_por_jogo_time_casa_fora = float(medias[2][2])
+media_gols_marcados_sofridos_por_jogo_time_casa_global = float(medias[2][3])
+
+jogos_sem_sofrer_gols_time_casa_em_casa = int(medias[3][1].replace("%",'')) / 100
+jogos_sem_sofrer_gols_time_casa_fora = int(medias[3][2].replace("%",'')) / 100
+jogos_sem_sofrer_gols_time_casa_global = int(medias[3][3].replace("%",'')) / 100
+
+jogos_sem_marcar_gols_time_casa_em_casa = int(medias[4][1].replace("%",'')) / 100
+jogos_sem_marcar_gols_time_casa_fora = int(medias[4][2].replace("%",'')) / 100
+jogos_sem_marcar_gols_time_casa_global = int(medias[4][3].replace("%",'')) / 100
+
+jogos_com_mais_de_dois_gols_e_meio_time_casa_em_casa = int(medias[5][1].replace("%",'')) / 100
+jogos_com_mais_de_dois_gols_e_meio_time_casa_fora = int(medias[5][2].replace("%",'')) / 100
+jogos_com_mais_de_dois_gols_e_meio_time_casa_global = int(medias[5][3].replace("%",'')) / 100
+
+jogos_com_menos_de_dois_gols_e_meio_time_casa_em_casa = int(medias[6][1].replace("%",'')) / 100
+jogos_com_menos_de_dois_gols_e_meio_time_casa_fora = int(medias[6][2].replace("%",'')) / 100
+jogos_com_menos_de_dois_gols_e_meio_time_casa_global = int(medias[6][3].replace("%",'')) / 100
+
+#### TIME VISITANTE
+medias = []
+for linha in estatist_time_fora:
+    tds = linha.find_all("td")
+    valores = []
+    for td in tds:
+        valores.append(td.get_text().strip())
+    medias.append(valores)
 
 
-# estatist = estatist.find_all("table", class_="stat-seqs stat-half-padding")
 
-# estatist_time_casa = estatist[0]
-# estatist_time_visitante = estatist[1]
+media_gols_marcados_por_jogo_time_visitante_em_casa = float(medias[0][1])
+media_gols_marcados_por_jogo_time_visitante_fora = float(medias[0][2])
+media_gols_marcados_por_jogo_time_visitante_global = float(medias[0][3])
 
-# estatist_time_casa = estatist_time_casa.find("tbody")
+media_gols_sofridos_por_jogo_time_visitante_em_casa = float(medias[1][1])
+media_gols_sofridos_por_jogo_time_visitante_fora = float(medias[1][2])
+media_gols_sofridos_por_jogo_time_visitante_global = float(medias[1][3])
 
-#print(estatist_time_casa)
+media_gols_marcados_sofridos_por_jogo_time_visitante_em_casa = float(medias[2][1])
+media_gols_marcados_sofridos_por_jogo_time_visitante_fora = float(medias[2][2])
+media_gols_marcados_sofridos_por_jogo_time_visitante_global = float(medias[2][3])
+
+jogos_sem_sofrer_gols_time_visitante_em_casa = int(medias[3][1].replace("%",'')) / 100
+jogos_sem_sofrer_gols_time_visitante_fora = int(medias[3][2].replace("%",'')) / 100
+jogos_sem_sofrer_gols_time_visitante_global = int(medias[3][3].replace("%",'')) / 100
+
+jogos_sem_marcar_gols_time_visitante_em_casa = int(medias[4][1].replace("%",'')) / 100
+jogos_sem_marcar_gols_time_visitante_fora = int(medias[4][2].replace("%",'')) / 100
+jogos_sem_marcar_gols_time_visitante_global = int(medias[4][3].replace("%",'')) / 100
+
+jogos_com_mais_de_dois_gols_e_meio_time_visitante_em_casa = int(medias[5][1].replace("%",'')) / 100
+jogos_com_mais_de_dois_gols_e_meio_time_visitante_fora = int(medias[5][2].replace("%",'')) / 100
+jogos_com_mais_de_dois_gols_e_meio_time_visitante_global = int(medias[5][3].replace("%",'')) / 100
+
+jogos_com_menos_de_dois_gols_e_meio_time_visitante_em_casa = int(medias[6][1].replace("%",'')) / 100
+jogos_com_menos_de_dois_gols_e_meio_time_visitante_fora = int(medias[6][2].replace("%",'')) / 100
+jogos_com_menos_de_dois_gols_e_meio_time_visitante_global = int(medias[6][3].replace("%",'')) / 100
 
 
+estatist = soup.find("tbody", class_="ajax-container")
+estatist_momento_gols = estatist.find_all("table", class_="stat-goals")
+
+estatist_momento_gols_time_casa = estatist_momento_gols[0]
+estatist_momento_gols_time_fora = estatist_momento_gols[1]
+
+estatist_momento_gols_time_casa = estatist_momento_gols_time_casa.find("tbody", class_="stat-quarts-padding")
+estatist_momento_gols_time_casa = estatist_momento_gols_time_casa.find_all("tr")
+
+lista = []
+par = True
+
+estatist_momento_gols_time_casa.pop()
+
+lista_momento_gols = []
+lista = []
+for tr in estatist_momento_gols_time_casa:
+    if(par):
+        gols_marcados = int(tr.find("td", class_="stats-wd-goalstime3").get_text().strip())
+        lista.append(gols_marcados)
+        par = False
+        gols_sofridos = None
+    else:
+        gols_sofridos = tr.find_all("td")
+        gols_sofridos = int(gols_sofridos[1].get_text().strip())
+        lista.append(gols_sofridos)
+        lista_momento_gols.append(lista)
+        lista = []
+        gols_marcados = None
+        par = True
+
+gols_marcados_time_casa_primeiro_sexto = lista_momento_gols[0][0]
+gols_marcados_time_casa_segundo_sexto = lista_momento_gols[1][0]
+gols_marcados_time_casa_terceiro_sexto = lista_momento_gols[2][0]
+gols_marcados_time_casa_quarto_sexto = lista_momento_gols[3][0]
+gols_marcados_time_casa_quinto_sexto = lista_momento_gols[4][0]
+gols_marcados_time_casa_ultimo_sexto = lista_momento_gols[5][0]
 
 
+gols_sofridos_time_casa_primeiro_sexto = lista_momento_gols[0][1]
+gols_sofridos_time_casa_segundo_sexto = lista_momento_gols[1][1]
+gols_sofridos_time_casa_terceiro_sexto = lista_momento_gols[2][1]
+gols_sofridos_time_casa_quarto_sexto = lista_momento_gols[3][1]
+gols_sofridos_time_casa_quinto_sexto = lista_momento_gols[4][1]
+gols_sofridos_time_casa_ultimo_sexto = lista_momento_gols[5][1]
 
 
+################### Visitante
 
+estatist_momento_gols_time_fora = estatist_momento_gols_time_fora.find("tbody", class_="stat-quarts-padding")
+estatist_momento_gols_time_fora = estatist_momento_gols_time_fora.find_all("tr")
+
+lista = []
+par = True
+
+estatist_momento_gols_time_fora.pop()
+
+lista_momento_gols = []
+lista = []
+for tr in estatist_momento_gols_time_fora:
+    if(par):
+        gols_marcados = int(tr.find("td", class_="stats-wd-goalstime3").get_text().strip())
+        lista.append(gols_marcados)
+        par = False
+        gols_sofridos = None
+    else:
+        gols_sofridos = tr.find_all("td")
+        gols_sofridos = int(gols_sofridos[1].get_text().strip())
+        lista.append(gols_sofridos)
+        lista_momento_gols.append(lista)
+        lista = []
+        gols_marcados = None
+        par = True
+
+
+gols_marcados_time_visitante_primeiro_sexto = lista_momento_gols[0][0]
+gols_marcados_time_visitante_segundo_sexto = lista_momento_gols[1][0]
+gols_marcados_time_visitante_terceiro_sexto = lista_momento_gols[2][0]
+gols_marcados_time_visitante_quarto_sexto = lista_momento_gols[3][0]
+gols_marcados_time_visitante_quinto_sexto = lista_momento_gols[4][0]
+gols_marcados_time_visitante_ultimo_sexto = lista_momento_gols[5][0]
+
+gols_sofridos_time_visitante_primeiro_sexto = lista_momento_gols[0][1]
+gols_sofridos_time_visitante_segundo_sexto = lista_momento_gols[1][1]
+gols_sofridos_time_visitante_terceiro_sexto = lista_momento_gols[2][1]
+gols_sofridos_time_visitante_quarto_sexto = lista_momento_gols[3][1]
+gols_sofridos_time_visitante_quinto_sexto = lista_momento_gols[4][1]
+gols_sofridos_time_visitante_ultimo_sexto = lista_momento_gols[5][1]
 '''
 print(minutos_expulsoes_time_a)
 print(minutos_expulsoes_time_b)
@@ -324,4 +459,77 @@ print(posicao_time_fora)
 print(odd_time_casa)
 print(odd_empate)
 print(odd_time_fora)
+
+
+print(media_gols_marcados_por_jogo_time_casa_em_casa)
+print(media_gols_marcados_por_jogo_time_casa_fora)
+print(media_gols_marcados_por_jogo_time_casa_global)
+print(media_gols_sofridos_por_jogo_time_casa_em_casa)
+print(media_gols_sofridos_por_jogo_time_casa_fora )
+print(media_gols_sofridos_por_jogo_time_casa_global)
+print(media_gols_marcados_sofridos_por_jogo_time_casa_em_casa)
+print(media_gols_marcados_sofridos_por_jogo_time_casa_fora)
+print(media_gols_marcados_sofridos_por_jogo_time_casa_global)
+print(jogos_sem_sofrer_gols_time_casa_em_casa)
+print(jogos_sem_sofrer_gols_time_casa_fora)
+print(jogos_sem_sofrer_gols_time_casa_global)
+print(jogos_sem_marcar_gols_time_casa_em_casa)
+print(jogos_sem_marcar_gols_time_casa_fora)
+print(jogos_sem_marcar_gols_time_casa_global)
+print(jogos_com_mais_de_dois_gols_e_meio_time_casa_em_casa)
+print(jogos_com_mais_de_dois_gols_e_meio_time_casa_fora)
+print(jogos_com_mais_de_dois_gols_e_meio_time_casa_global)
+print(jogos_com_menos_de_dois_gols_e_meio_time_casa_em_casa)
+print(jogos_com_menos_de_dois_gols_e_meio_time_casa_fora)
+print(jogos_com_menos_de_dois_gols_e_meio_time_casa_global)
+
+
+print(media_gols_marcados_por_jogo_time_visitante_em_casa)
+print(media_gols_marcados_por_jogo_time_visitante_fora)
+print(media_gols_marcados_por_jogo_time_visitante_global)
+print(media_gols_sofridos_por_jogo_time_visitante_em_casa)
+print(media_gols_sofridos_por_jogo_time_visitante_fora )
+print(media_gols_sofridos_por_jogo_time_visitante_global)
+print(media_gols_marcados_sofridos_por_jogo_time_visitante_em_casa)
+print(media_gols_marcados_sofridos_por_jogo_time_visitante_fora)
+print(media_gols_marcados_sofridos_por_jogo_time_visitante_global)
+print(jogos_sem_sofrer_gols_time_visitante_em_casa)
+print(jogos_sem_sofrer_gols_time_visitante_fora)
+print(jogos_sem_sofrer_gols_time_visitante_global)
+print(jogos_sem_marcar_gols_time_visitante_em_casa)
+print(jogos_sem_marcar_gols_time_visitante_fora)
+print(jogos_sem_marcar_gols_time_visitante_global)
+print(jogos_com_mais_de_dois_gols_e_meio_time_visitante_em_casa)
+print(jogos_com_mais_de_dois_gols_e_meio_time_visitante_fora)
+print(jogos_com_mais_de_dois_gols_e_meio_time_visitante_global)
+print(jogos_com_menos_de_dois_gols_e_meio_time_visitante_em_casa)
+print(jogos_com_menos_de_dois_gols_e_meio_time_visitante_fora)
+print(jogos_com_menos_de_dois_gols_e_meio_time_visitante_global)
+
+
+print(gols_marcados_time_casa_primeiro_sexto)
+print(gols_sofridos_time_casa_primeiro_sexto) 
+print(gols_marcados_time_casa_segundo_sexto)
+print(gols_sofridos_time_casa_segundo_sexto)
+print(gols_marcados_time_casa_terceiro_sexto)
+print(gols_sofridos_time_casa_terceiro_sexto)
+print(gols_marcados_time_casa_quarto_sexto)
+print(gols_sofridos_time_casa_quarto_sexto)
+print(gols_marcados_time_casa_quinto_sexto)
+print(gols_sofridos_time_casa_quinto_sexto)
+print(gols_marcados_time_casa_ultimo_sexto)
+print(gols_sofridos_time_casa_ultimo_sexto)
+
+print(gols_marcados_time_visitante_primeiro_sexto)
+print(gols_sofridos_time_visitante_primeiro_sexto) 
+print(gols_marcados_time_visitante_segundo_sexto)
+print(gols_sofridos_time_visitante_segundo_sexto)
+print(gols_marcados_time_visitante_terceiro_sexto)
+print(gols_sofridos_time_visitante_terceiro_sexto)
+print(gols_marcados_time_visitante_quarto_sexto)
+print(gols_sofridos_time_visitante_quarto_sexto)
+print(gols_marcados_time_visitante_quinto_sexto)
+print(gols_sofridos_time_visitante_quinto_sexto)
+print(gols_marcados_time_visitante_ultimo_sexto)
+print(gols_sofridos_time_visitante_ultimo_sexto)
 '''
