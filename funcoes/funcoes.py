@@ -66,3 +66,10 @@ def identificar_minuto_expulsao_vermelho_direto(time):
             minutos_expulsoes.append(minuto)
 
     return minutos_expulsoes
+
+def verificar_se_teve_expulsao(expulsoes_time_a, expulsoes_time_b):
+    if(len(expulsoes_time_a) + len(expulsoes_time_b) > 0):
+        return True
+    else:
+        return False
+

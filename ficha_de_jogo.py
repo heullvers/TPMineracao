@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
+from dados_da_partida import coleta_dados
+
 #page do campeonato brasileiro 2019 na 15ª rodada.
-page = requests.get("https://www.academiadasapostasbrasil.com/stats/competition/inglaterra-stats/8/17429/53145/0/4")
+page = requests.get("https://www.academiadasapostasbrasil.com/stats/competition/brasil-stats/26/16888/51143/0/17")
 
 
 soup = BeautifulSoup(page.content, 'html.parser')
@@ -50,6 +52,11 @@ for partida in tabela:
     else:
         aux += 1
 
+for link in link_ficha_de_jogo:
+    coleta_dados(link)
+
+
+#print(link_ficha_de_jogo)
 '''
 print(nome_campeonato)
 print(temporada)
