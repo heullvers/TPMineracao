@@ -6,7 +6,6 @@ from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_a
 import datetime
 
 def coleta_dados(link):
-    print(link)
     page = requests.get(link)
     soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -34,6 +33,8 @@ def coleta_dados(link):
 
         time_dentro = time_dentro[1].get_text().strip() #TIME MANDANTE
         time_fora = time_fora[1].get_text().strip() #TIME VISITANTE
+
+        print(time_dentro, 'x', time_fora)
         ####
 
         ### Descobrir o placar final do jogo
