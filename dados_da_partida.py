@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from Enum.Meses import qualMes
-from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto, verificar_se_teve_expulsao
+from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto, verificar_se_teve_expulsao, verifica_tempo_gols
 import datetime
 
 def coleta_dados(link):
@@ -17,6 +17,7 @@ def coleta_dados(link):
     time_a = soup.find(id="team_A_")
     time_b = soup.find(id="team_B_")
 
+    
     minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(time_a)
     minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(time_a)
     minutos_expulsoes_time_a = minutos_seg_amarelo + minutos_ver_direto
@@ -26,6 +27,33 @@ def coleta_dados(link):
     minutos_expulsoes_time_b = minutos_seg_amarelo + minutos_ver_direto
 
     if(verificar_se_teve_expulsao(minutos_expulsoes_time_a, minutos_expulsoes_time_b)):
+
+        #minutos em que os gols da partida foram realizados
+        minutos_gols_time_a = verifica_tempo_gols(time_a)
+        minutos_gols_time_b = verifica_tempo_gols(time_b)
+
+        ##placar do jogo no momento da expulsao
+        minutos_expulsoes = minutos_expulsoes_time_a + minutos_expulsoes_time_b
+
+        placar_no_momento_da_expulsao = []
+        for minuto_expulsao in minutos_expulsoes:
+            gols_time_a = 0
+            gols_time_b = 0
+            for minuto_gol in minutos_gols_time_a:
+                if(minuto_expulsao <= minuto_gol):
+                    gols_time_a += 1
+            for minuto_gol in minutos_expulsoes_time_b:
+                if(minuto_expulsao <= minuto_gol):
+                    gols_time_b += 1
+            
+            print("PLACAR", gols_time_a, "X", gols_time_b)
+
+
+
+        print("MINUTOS GOLS")
+        print(minutos_gols_time_a)
+        print(minutos_gols_time_b)
+        print(minutos_expulsoes)
 
         ### Descobrir time mandante e visitante
         time_dentro = dados_gerais_da_partida[0].find_all("a")
@@ -589,8 +617,8 @@ def coleta_dados(link):
     
     print(minutos_expulsoes_time_a)
     print(minutos_expulsoes_time_b)
-
-#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/argentina-stats/campeonato-argentino/arsenal-de-sarandi/san-lorenzo/3070361/1/live')
+    
+coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/avai/corinthians/2989073/1/live')
 
 '''
 

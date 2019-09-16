@@ -21,6 +21,7 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 .verificar placar do jogo no momento do cartão vermelho + (V/E/D)(x)
 .verificar quantos gols saiu antes da expulsão e após a expulsao (x)
 .identificar modo de organizar as expulsoes (jogo que ocorreu mais de uma expulsão por exemplo) (x)
+.quantos cartoes saiu no jogo para o time da casa e visitante (x)
 ----------------------
 -----------------------
 

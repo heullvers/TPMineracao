@@ -7,7 +7,7 @@ from dados_da_partida import coleta_dados
 
 ##MONTAR ARRAY COM LINK DOS CAMPEONATOS QUE SERÃO EXTRAÍDOS OS DADOS
 
-link_inicial = "https://www.academiadasapostasbrasil.com/stats/competition/alemanha-stats/9"
+link_inicial = "https://www.academiadasapostasbrasil.com/stats/competition/brasil-stats/26"
 
 page = requests.get(link_inicial)
 soup = BeautifulSoup(page.content, 'html.parser')

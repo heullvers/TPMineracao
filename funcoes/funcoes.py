@@ -73,3 +73,29 @@ def verificar_se_teve_expulsao(expulsoes_time_a, expulsoes_time_b):
     else:
         return False
 
+def verifica_tempo_gols(time):
+    minutos_gols = []
+    gols_results_string = str(time).replace('tr&gt;','').replace('th&gt;','').replace('td&gt;','').replace('&lt;','').replace('&gt','').replace('/','').replace(';','').replace('span','').replace('undermark','').replace('overermark','').replace('class=','').replace('\""','').replace('.','')
+    gols_results_string_split = gols_results_string.split()
+
+    if ("aa-icon-G'" in gols_results_string_split) or ("aa-icon-PG'" in gols_results_string_split):
+        posicao = 0
+        posicoes = []
+        for pos in gols_results_string_split:
+            if((pos == "aa-icon-PG'") or (pos == "aa-icon-G'")):
+                posicoes.append(posicao + 4)
+            posicao += 1
+
+        for pos in posicoes:
+            minuto = gols_results_string_split[pos]
+            minuto = minuto.replace("'",'')
+            if '+' in minuto:
+                minuto = minuto.split('+')
+                minuto = int(minuto[0])+ int(minuto[1])
+            else:
+                minuto = int(minuto)
+            minutos_gols.append(minuto)
+
+    return minutos_gols
+
+
