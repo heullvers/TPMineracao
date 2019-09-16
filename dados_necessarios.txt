@@ -7,6 +7,7 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 .identificar links de cada rodada (x)
 .verificar coleta de dados nos anos anteriores a 2010 (brasileiro) e verificar em outros campeonatos (x)
 
+
 .campeonato (v)
 .temporada (v)
 .pais (v)
@@ -14,6 +15,15 @@ FORMATO PARA COLETA DE DADOS A PARTIR DE 2010
 .links da ficha de cada jogo da rodada (v)
 --------
 .verificar segundo cartao amarelo e cartao vermelho (v)
+
+-------------------
+---------------------
+.verificar placar do jogo no momento do cartão vermelho + (V/E/D)(x)
+.verificar quantos gols saiu antes da expulsão e após a expulsao (x)
+.identificar modo de organizar as expulsoes (jogo que ocorreu mais de uma expulsão por exemplo) (x)
+----------------------
+-----------------------
+
 .nome time mandante (v)
 .nome time visitante (v)
 .placar final (v)

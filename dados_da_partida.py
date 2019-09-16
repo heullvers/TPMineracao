@@ -229,7 +229,12 @@ def coleta_dados(link):
 
             todas_odds = []
             for odd in odds:
-                todas_odds.append(float(odd.get_text().strip()))
+                cotacao = odd.get_text().strip()
+                if(cotacao):
+                    cotacao = float(cotacao)
+                else:
+                    cotacao = None
+                todas_odds.append(cotacao)
 
             odd_time_casa = todas_odds[0]
             odd_empate = todas_odds[1]
@@ -238,9 +243,6 @@ def coleta_dados(link):
             odd_time_casa = None
             odd_empate = None
             odd_time_fora = None
-
-        
-
 
         ##Mais algumas estatisticas
         estatist = soup.find("tbody", class_="ajax-container")
@@ -584,10 +586,13 @@ def coleta_dados(link):
         print('nao teve expulsao')
 
 
-
+    
     print(minutos_expulsoes_time_a)
     print(minutos_expulsoes_time_b)
-    '''
+
+#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/argentina-stats/campeonato-argentino/arsenal-de-sarandi/san-lorenzo/3070361/1/live')
+
+'''
 
     print(time_dentro)
     print(time_fora)
