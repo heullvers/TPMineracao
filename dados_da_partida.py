@@ -33,27 +33,21 @@ def coleta_dados(link):
         minutos_gols_time_b = verifica_tempo_gols(time_b)
 
         ##placar do jogo no momento da expulsao
-        minutos_expulsoes = minutos_expulsoes_time_a + minutos_expulsoes_time_b
+        minutos_expulsoes = sorted(minutos_expulsoes_time_a + minutos_expulsoes_time_b)
 
         placar_no_momento_da_expulsao = []
         for minuto_expulsao in minutos_expulsoes:
             gols_time_a = 0
             gols_time_b = 0
             for minuto_gol in minutos_gols_time_a:
-                if(minuto_expulsao <= minuto_gol):
+                if(minuto_expulsao >= minuto_gol):
                     gols_time_a += 1
-            for minuto_gol in minutos_expulsoes_time_b:
-                if(minuto_expulsao <= minuto_gol):
+            for minuto_gol in minutos_gols_time_b:
+                if(minuto_expulsao >= minuto_gol):
                     gols_time_b += 1
             
-            print("PLACAR", gols_time_a, "X", gols_time_b)
-
-
-
-        print("MINUTOS GOLS")
-        print(minutos_gols_time_a)
-        print(minutos_gols_time_b)
-        print(minutos_expulsoes)
+            placar_no_momento = str(gols_time_a) + '-' + str(gols_time_b)
+            placar_no_momento_da_expulsao.append(placar_no_momento)
 
         ### Descobrir time mandante e visitante
         time_dentro = dados_gerais_da_partida[0].find_all("a")
@@ -610,15 +604,17 @@ def coleta_dados(link):
         gols_sofridos_time_visitante_ultimo_sexto = lista_momento_gols[5][1]
 
         print('teve expulsao')
+        print(minutos_expulsoes_time_a)
+        print(minutos_expulsoes_time_b)
+        print("PLACARES MOMENTANEOS", placar_no_momento_da_expulsao)
     else:
         print('nao teve expulsao')
 
 
     
-    print(minutos_expulsoes_time_a)
-    print(minutos_expulsoes_time_b)
     
-coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/avai/corinthians/2989073/1/live')
+    
+#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/bahia/cruzeiro/2989024/1/live')
 
 '''
 
@@ -740,4 +736,7 @@ coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/
     print(gols_sofridos_time_visitante_quinto_sexto)
     print(gols_marcados_time_visitante_ultimo_sexto)
     print(gols_sofridos_time_visitante_ultimo_sexto)
+
+
+    print("PLACARES MOMENTANEOS", placar_no_momento_da_expulsao)
     '''
