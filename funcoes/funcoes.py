@@ -98,4 +98,21 @@ def verifica_tempo_gols(time):
 
     return minutos_gols
 
+def verifica_placares_momentaneos(minutos_expulsoes, minutos_gols_time_a, minutos_gols_time_b):
+    placar_no_momento_da_expulsao = []
+    for minuto_expulsao in minutos_expulsoes:
+        gols_time_a = 0
+        gols_time_b = 0
+        for minuto_gol in minutos_gols_time_a:
+            if(minuto_expulsao >= minuto_gol):
+                gols_time_a += 1
+        for minuto_gol in minutos_gols_time_b:
+            if(minuto_expulsao >= minuto_gol):
+                gols_time_b += 1
+        
+        placar_no_momento = str(gols_time_a) + '-' + str(gols_time_b)
+        placar_no_momento_da_expulsao.append(placar_no_momento)
+
+    return placar_no_momento_da_expulsao
+
 

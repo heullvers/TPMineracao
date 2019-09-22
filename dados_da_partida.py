@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from Enum.Meses import qualMes
-from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto, verificar_se_teve_expulsao, verifica_tempo_gols
+from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto, verificar_se_teve_expulsao, verifica_tempo_gols, verifica_placares_momentaneos
 import datetime
 
 def coleta_dados(link):
@@ -17,14 +17,34 @@ def coleta_dados(link):
     time_a = soup.find(id="team_A_")
     time_b = soup.find(id="team_B_")
 
-    
+    ##TIME A
     minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(time_a)
     minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(time_a)
     minutos_expulsoes_time_a = minutos_seg_amarelo + minutos_ver_direto
 
+    expulsoes_verificar_cartao = []
+    ##adiciona atributo de segundo amarelo ou cartão vermelho time a
+    if(minutos_expulsoes_time_a):
+        for expulsao in minutos_seg_amarelo:
+            expulsoes_verificar_cartao.append([expulsao, 'Segundo amarelo'])
+        for expulsao in minutos_ver_direto:
+            expulsoes_verificar_cartao.append([expulsao, 'Vermelho direto'])
+
+    
+    ##TIME B
     minutos_seg_amarelo = identificar_minuto_expulsao_segundo_amarelo(time_b)
     minutos_ver_direto = identificar_minuto_expulsao_vermelho_direto(time_b)
     minutos_expulsoes_time_b = minutos_seg_amarelo + minutos_ver_direto
+
+    ##adiciona atributo de segundo amarelo ou cartão vermelho time b
+    if(minutos_expulsoes_time_b):
+        for expulsao in minutos_ver_direto:
+            expulsoes_verificar_cartao.append([expulsao, 'Vermelho direto'])
+        for expulsao in minutos_seg_amarelo:
+            expulsoes_verificar_cartao.append([expulsao, 'Segundo amarelo'])
+
+    if(len(expulsoes_verificar_cartao) > 1):
+        expulsoes_verificar_cartao = sorted(expulsoes_verificar_cartao, key=lambda x:x[0])
 
     if(verificar_se_teve_expulsao(minutos_expulsoes_time_a, minutos_expulsoes_time_b)):
 
@@ -32,22 +52,190 @@ def coleta_dados(link):
         minutos_gols_time_a = verifica_tempo_gols(time_a)
         minutos_gols_time_b = verifica_tempo_gols(time_b)
 
+        ##qtd de expulsoes
+        qtd_expulsoes_time_a = len(minutos_expulsoes_time_a)
+        qtd_expulsoes_time_b = len(minutos_expulsoes_time_b)
+
+        ##atributos minuto tempo cada expulsao
+        minuto_primeira_expulsao_time_a = None
+        minuto_segunda_expulsao_time_a = None
+        minuto_terceira_expulsao_time_a = None
+        minuto_quarta_expulsao_time_a = None
+
+        minuto_primeira_expulsao_time_b = None
+        minuto_segunda_expulsao_time_b = None
+        minuto_terceira_expulsao_time_b = None
+        minuto_quarta_expulsao_time_b = None
+
+        i = 0
+        while(i < qtd_expulsoes_time_a):
+            if(i == 0):
+                minuto_primeira_expulsao_time_a = minutos_expulsoes_time_a[0]
+            elif(i == 1):
+                minuto_segunda_expulsao_time_a = minutos_expulsoes_time_a[1]
+            elif(i == 2):
+                minuto_terceira_expulsao_time_a = minutos_expulsoes_time_a[2]
+            else:
+                minuto_quarta_expulsao_time_a = minutos_expulsoes_time_a[3]
+            i += 1
+
+        i = 0
+        while(i < qtd_expulsoes_time_b):
+            if(i == 0):
+                minuto_primeira_expulsao_time_b = minutos_expulsoes_time_b[0]
+            elif(i == 1):
+                minuto_segunda_expulsao_time_b = minutos_expulsoes_time_b[1]
+            elif(i == 2):
+                minuto_terceira_expulsao_time_b = minutos_expulsoes_time_b[2]
+            else:
+                minuto_quarta_expulsao_time_b = minutos_expulsoes_time_b[3]
+
+            i += 1
+
+        ### Descobrir o placar final do jogo
+        resultado_final = dados_gerais_da_partida[1].find(class_="f-score odd").get_text().strip() #resultado final no formato (0-0)
+        gols_times = resultado_final.split()
+
+        gols_mandante = int(gols_times[0]) #quantidade de gols do time mandante
+        gols_visitante = int(gols_times[2]) #quantidade de gols do time visitante
+        ###
+
         ##placar do jogo no momento da expulsao
         minutos_expulsoes = sorted(minutos_expulsoes_time_a + minutos_expulsoes_time_b)
+        placares_no_momento_da_expulsao = verifica_placares_momentaneos(minutos_expulsoes, minutos_gols_time_a, minutos_gols_time_b)
 
-        placar_no_momento_da_expulsao = []
-        for minuto_expulsao in minutos_expulsoes:
-            gols_time_a = 0
-            gols_time_b = 0
-            for minuto_gol in minutos_gols_time_a:
-                if(minuto_expulsao >= minuto_gol):
-                    gols_time_a += 1
-            for minuto_gol in minutos_gols_time_b:
-                if(minuto_expulsao >= minuto_gol):
-                    gols_time_b += 1
-            
-            placar_no_momento = str(gols_time_a) + '-' + str(gols_time_b)
-            placar_no_momento_da_expulsao.append(placar_no_momento)
+        ##atributos placar do jogo cada expulsao
+        placar_momento_expulsao_um = None
+        placar_momento_expulsao_dois = None
+        placar_momento_expulsao_tres = None
+        placar_momento_expulsao_quatro = None
+        placar_momento_expulsao_cinco = None
+        placar_momento_expulsao_seis = None
+        placar_momento_expulsao_sete = None
+        placar_momento_expulsao_oito = None
+
+        ##atributos vermelho direto ou segundo amarelo
+        expulsao_um_cartao = None
+        expulsao_dois_cartao = None
+        expulsao_tres_cartao = None
+        expulsao_quatro_cartao = None
+        expulsao_cinco_cartao = None
+        expulsao_seis_cartao = None
+        expulsao_sete_cartao = None
+        expulsao_oito_cartao = None
+
+        ##quantidade de gols após expulsão
+        quantidade_de_gols_apos_expulsao_um_time_a = 0
+        quantidade_de_gols_apos_expulsao_um_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_dois_time_a = 0
+        quantidade_de_gols_apos_expulsao_dois_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_tres_time_a = 0
+        quantidade_de_gols_apos_expulsao_tres_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_quatro_time_a = 0
+        quantidade_de_gols_apos_expulsao_quatro_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_cinco_time_a = 0
+        quantidade_de_gols_apos_expulsao_cinco_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_seis_time_a = 0
+        quantidade_de_gols_apos_expulsao_seis_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_sete_time_a = 0
+        quantidade_de_gols_apos_expulsao_sete_time_b = 0
+
+        quantidade_de_gols_apos_expulsao_oito_time_a = 0
+        quantidade_de_gols_apos_expulsao_oito_time_b = 0
+
+        i = 0
+        while(i < len(placares_no_momento_da_expulsao)):
+            if(i == 0):
+                placar_momento_expulsao_um = placares_no_momento_da_expulsao[0]
+                expulsao_um_cartao = expulsoes_verificar_cartao[0][1]
+
+                gols = placar_momento_expulsao_um.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_um_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_um_time_b = gols_visitante - qtd_gols_time_b
+
+            elif(i == 1):
+                placar_momento_expulsao_dois = placares_no_momento_da_expulsao[1]
+                expulsao_dois_cartao = expulsoes_verificar_cartao[1][1]
+
+                gols = placar_momento_expulsao_dois.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_dois_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_dois_time_b = gols_visitante - qtd_gols_time_b
+
+            elif(i == 2):
+                placar_momento_expulsao_tres = placares_no_momento_da_expulsao[2]
+                expulsao_tres_cartao = expulsoes_verificar_cartao[2][1]
+
+                gols = placar_momento_expulsao_tres.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_tres_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_tres_time_b = gols_visitante - qtd_gols_time_b
+
+            elif(i == 3):
+                placar_momento_expulsao_quatro = placares_no_momento_da_expulsao[3]
+                expulsao_quatro_cartao = expulsoes_verificar_cartao[3][1]
+
+                gols = placar_momento_expulsao_quatro.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_quatro_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_quatro_time_b = gols_visitante - qtd_gols_time_b
+
+            elif(i == 4):
+                placar_momento_expulsao_cinco = placares_no_momento_da_expulsao[4]
+                expulsao_cinco_cartao = expulsoes_verificar_cartao[4][1]
+
+                gols = placar_momento_expulsao_cinco.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_cinco_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_cinco_time_b = gols_visitante - qtd_gols_time_b
+            elif(i == 5):
+                placar_momento_expulsao_seis = placares_no_momento_da_expulsao[5]
+                expulsao_seis_cartao = expulsoes_verificar_cartao[5][1]
+
+                gols = placar_momento_expulsao_seis.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_seis_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_seis_time_b = gols_visitante - qtd_gols_time_b
+            elif(i == 6):
+                placar_momento_expulsao_sete = placares_no_momento_da_expulsao[6]
+                expulsao_sete_cartao = expulsoes_verificar_cartao[6][1]
+
+                gols = placar_momento_expulsao_sete.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_sete_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_sete_time_b = gols_visitante - qtd_gols_time_b
+            else:
+                placar_momento_expulsao_oito = placares_no_momento_da_expulsao[7]
+                expulsao_oito_cartao = expulsoes_verificar_cartao[7][1]
+
+                gols = placar_momento_expulsao_oito.split('-')
+                qtd_gols_time_a = int(gols[0])
+                qtd_gols_time_b = int(gols[1])
+
+                quantidade_de_gols_apos_expulsao_oito_time_a = gols_mandante - qtd_gols_time_a
+                quantidade_de_gols_apos_expulsao_oito_time_b = gols_visitante - qtd_gols_time_b
+            i += 1        
 
         ### Descobrir time mandante e visitante
         time_dentro = dados_gerais_da_partida[0].find_all("a")
@@ -56,16 +244,7 @@ def coleta_dados(link):
         time_dentro = time_dentro[1].get_text().strip() #TIME MANDANTE
         time_fora = time_fora[1].get_text().strip() #TIME VISITANTE
 
-        print(time_dentro, 'x', time_fora)
         ####
-
-        ### Descobrir o placar final do jogo
-        resultado_final = dados_gerais_da_partida[1].find(class_="f-score odd").get_text().strip() #resultado final no formato (0-0)
-        gols_times = resultado_final.split()
-
-        gols_mandante = gols_times[0] #quantidade de gols do time mandante
-        gols_visitante = gols_times[2] #quantidade de gols do time visitante
-        ###
 
         ### Descobrir data do jogo
         data_do_jogo = dados_gerais_da_partida[1].find_all(class_="gamehead")
@@ -93,85 +272,6 @@ def coleta_dados(link):
 
         ##Dia da semana
         dia_semana= dia_da_semana(ano,mes,dia)
-
-        estatisticas = soup.find("table", class_="match_stats_center")
-        ##Posse de bola
-        posse = estatisticas.find("tr", class_="possession")
-        if(posse):
-            posse_time_a = (int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))) / 100
-            posse_time_b = (int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))) / 100
-        else:
-            posse_time_a = None
-            posse_time_b = None
-
-        ##Chutes a gol
-        chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
-        if(chutes_a_gol):
-            chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
-            chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            chutes_a_gol_time_a = None
-            chutes_a_gol_time_b = None
-
-        ##Chutes fora
-        #shots_off_target
-        chutes_fora = estatisticas.find("tr", class_="shots_off_target")
-        if(chutes_fora):
-            chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
-            chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            chutes_fora_time_a = None
-            chutes_fora_time_b = None
-
-        ##Ataques
-        #attacks
-        ataques = estatisticas.find("tr", class_="attacks")
-        if(ataques):
-            ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
-            ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            ataques_time_a = None
-            ataques_time_b = None
-
-        ##Ataques perigosos
-        #dangerous_attacks
-        ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
-        if(ataques_perigosos):
-            ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
-            ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            ataques_perigosos_time_a = None
-            ataques_perigosos_time_b = None
-
-        ##Impedimentos
-        #offsides
-        impedimentos = estatisticas.find("tr", class_="offsides")
-        if(impedimentos):
-            impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
-            impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            impedimentos_time_a = None
-            impedimentos_time_b = None
-
-        ##Faltas
-        #fouls
-        faltas = estatisticas.find("tr", class_="fouls")
-        if(faltas):
-            faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
-            faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            faltas_time_a = None
-            faltas_time_b = None
-
-        ##Escanteios
-        #corners
-        escanteios = estatisticas.find("tr", class_="corners")
-        if(escanteios):
-            escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
-            escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            escanteios_time_a = None
-            escanteios_time_b = None
 
         ##Estatisticas outra aba
         link = link.replace("live", "prelive")
@@ -603,21 +703,98 @@ def coleta_dados(link):
         gols_sofridos_time_visitante_quinto_sexto = lista_momento_gols[4][1]
         gols_sofridos_time_visitante_ultimo_sexto = lista_momento_gols[5][1]
 
-        print('teve expulsao')
-        print(minutos_expulsoes_time_a)
-        print(minutos_expulsoes_time_b)
-        print("PLACARES MOMENTANEOS", placar_no_momento_da_expulsao)
+        '''
+        estatisticas = soup.find("table", class_="match_stats_center")
+
+        ##Posse de bola
+        posse = estatisticas.find("tr", class_="possession")
+        if(posse):
+            posse_time_a = (int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))) / 100
+            posse_time_b = (int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))) / 100
+        else:
+            posse_time_a = None
+            posse_time_b = None
+
+        ##Chutes a gol
+        chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
+        if(chutes_a_gol):
+            chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
+            chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            chutes_a_gol_time_a = None
+            chutes_a_gol_time_b = None
+
+        ##Chutes fora
+        #shots_off_target
+        chutes_fora = estatisticas.find("tr", class_="shots_off_target")
+        if(chutes_fora):
+            chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
+            chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            chutes_fora_time_a = None
+            chutes_fora_time_b = None
+
+        ##Ataques
+        #attacks
+        ataques = estatisticas.find("tr", class_="attacks")
+        if(ataques):
+            ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
+            ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            ataques_time_a = None
+            ataques_time_b = None
+
+        ##Ataques perigosos
+        #dangerous_attacks
+        ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
+        if(ataques_perigosos):
+            ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
+            ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            ataques_perigosos_time_a = None
+            ataques_perigosos_time_b = None
+
+        ##Impedimentos
+        #offsides
+        impedimentos = estatisticas.find("tr", class_="offsides")
+        if(impedimentos):
+            impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
+            impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            impedimentos_time_a = None
+            impedimentos_time_b = None
+
+        ##Faltas
+        #fouls
+        faltas = estatisticas.find("tr", class_="fouls")
+        if(faltas):
+            faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
+            faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            faltas_time_a = None
+            faltas_time_b = None
+
+        ##Escanteios
+        #corners
+        escanteios = estatisticas.find("tr", class_="corners")
+        if(escanteios):
+            escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
+            escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            escanteios_time_a = None
+            escanteios_time_b = None
+
+        '''
+
+        print('Ocorreu expulsão')
     else:
-        print('nao teve expulsao')
+        print('Não ocorreu expulsao')
 
-
-    
-    
-    
-#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/bahia/cruzeiro/2989024/1/live')
+coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/csa/chapecoense/2989095/1/live')
 
 '''
 
+    #dados basicos
     print(time_dentro)
     print(time_fora)
     print(resultado_final)
@@ -628,23 +805,7 @@ def coleta_dados(link):
     print(turno)
     print(dia_semana)
 
-    print(posse_time_a)
-    print(posse_time_b)
-    print(chutes_a_gol_time_a)
-    print(chutes_a_gol_time_b)
-    print(chutes_fora_time_a)
-    print(chutes_fora_time_b)
-    print(ataques_time_a)
-    print(ataques_time_b)
-    print(ataques_perigosos_time_a)
-    print(ataques_perigosos_time_b)
-    print(impedimentos_time_a)
-    print(impedimentos_time_b)
-    print(faltas_time_a)
-    print(faltas_time_b)
-    print(escanteios_time_a)
-    print(escanteios_time_b)
-
+    #histórico últimos 5 jogos
     print(ultimo_jogo_casa)
     print(segundo_ultimo_jogo_casa)
     print(terceiro_ultimo_jogo_casa)
@@ -657,14 +818,16 @@ def coleta_dados(link):
     print(quarto_ultimo_jogo_visitante)
     print(quinto_ultimo_jogo_visitante)
 
+    #posição atual na tabela
     print(posicao_time_dentro)
     print(posicao_time_fora)
 
+    #cotação média em casa de apostas pré-jogo
     print(odd_time_casa)
     print(odd_empate)
     print(odd_time_fora)
 
-
+    #estatísticas aprofundadas
     print(media_gols_marcados_por_jogo_time_casa_em_casa)
     print(media_gols_marcados_por_jogo_time_casa_fora)
     print(media_gols_marcados_por_jogo_time_casa_global)
@@ -674,6 +837,7 @@ def coleta_dados(link):
     print(media_gols_marcados_sofridos_por_jogo_time_casa_em_casa)
     print(media_gols_marcados_sofridos_por_jogo_time_casa_fora)
     print(media_gols_marcados_sofridos_por_jogo_time_casa_global)
+
     print(jogos_sem_sofrer_gols_time_casa_em_casa)
     print(jogos_sem_sofrer_gols_time_casa_fora)
     print(jogos_sem_sofrer_gols_time_casa_global)
@@ -686,7 +850,6 @@ def coleta_dados(link):
     print(jogos_com_menos_de_dois_gols_e_meio_time_casa_em_casa)
     print(jogos_com_menos_de_dois_gols_e_meio_time_casa_fora)
     print(jogos_com_menos_de_dois_gols_e_meio_time_casa_global)
-
 
     print(media_gols_marcados_por_jogo_time_visitante_em_casa)
     print(media_gols_marcados_por_jogo_time_visitante_fora)
@@ -709,7 +872,6 @@ def coleta_dados(link):
     print(jogos_com_menos_de_dois_gols_e_meio_time_visitante_em_casa)
     print(jogos_com_menos_de_dois_gols_e_meio_time_visitante_fora)
     print(jogos_com_menos_de_dois_gols_e_meio_time_visitante_global)
-
 
     print(gols_marcados_time_casa_primeiro_sexto)
     print(gols_sofridos_time_casa_primeiro_sexto) 
@@ -737,6 +899,69 @@ def coleta_dados(link):
     print(gols_marcados_time_visitante_ultimo_sexto)
     print(gols_sofridos_time_visitante_ultimo_sexto)
 
+    ##dados relacionados a expulsao
+    print(minuto_primeira_expulsao_time_a)
+    print(minuto_segunda_expulsao_time_a)
+    print(minuto_terceira_expulsao_time_a)
+    print(minuto_quarta_expulsao_time_a)
+    print(minuto_primeira_expulsao_time_b)
+    print(minuto_segunda_expulsao_time_b)
+    print(minuto_terceira_expulsao_time_b)
+    print(minuto_quarta_expulsao_time_b)
 
-    print("PLACARES MOMENTANEOS", placar_no_momento_da_expulsao)
+    print(placar_momento_expulsao_um)
+    print(placar_momento_expulsao_dois)
+    print(placar_momento_expulsao_tres)
+    print(placar_momento_expulsao_quatro)
+    print(placar_momento_expulsao_cinco)
+    print(placar_momento_expulsao_seis)
+    print(placar_momento_expulsao_sete)
+    print(placar_momento_expulsao_oito)
+
+    print(expulsao_um_cartao)
+    print(expulsao_dois_cartao)
+    print(expulsao_tres_cartao)
+    print(expulsao_quatro_cartao)
+    print(expulsao_cinco_cartao)
+    print(expulsao_seis_cartao)
+    print(expulsao_sete_cartao)
+    print(expulsao_oito_cartao)
+
+    print(quantidade_de_gols_apos_expulsao_um_time_a)
+    print(quantidade_de_gols_apos_expulsao_um_time_b)
+    print(quantidade_de_gols_apos_expulsao_dois_time_a)
+    print(quantidade_de_gols_apos_expulsao_dois_time_b)
+    print(quantidade_de_gols_apos_expulsao_tres_time_a)
+    print(quantidade_de_gols_apos_expulsao_tres_time_b)
+    print(quantidade_de_gols_apos_expulsao_quatro_time_a)
+    print(quantidade_de_gols_apos_expulsao_quatro_time_b)
+    print(quantidade_de_gols_apos_expulsao_cinco_time_a)
+    print(quantidade_de_gols_apos_expulsao_cinco_time_b)
+    print(quantidade_de_gols_apos_expulsao_seis_time_a)
+    print(quantidade_de_gols_apos_expulsao_seis_time_b)
+    print(quantidade_de_gols_apos_expulsao_sete_time_a)
+    print(quantidade_de_gols_apos_expulsao_sete_time_b)
+    print(quantidade_de_gols_apos_expulsao_oito_time_a)
+    print(quantidade_de_gols_apos_expulsao_oito_time_b)
+
+    print(qtd_expulsoes_time_a)
+    print(qtd_expulsoes_time_b)
+
+    #estatisticas que não estão sendo utilizadas momentaneamente
+    print(posse_time_a)
+    print(posse_time_b)
+    print(chutes_a_gol_time_a)
+    print(chutes_a_gol_time_b)
+    print(chutes_fora_time_a)
+    print(chutes_fora_time_b)
+    print(ataques_time_a)
+    print(ataques_time_b)
+    print(ataques_perigosos_time_a)
+    print(ataques_perigosos_time_b)
+    print(impedimentos_time_a)
+    print(impedimentos_time_b)
+    print(faltas_time_a)
+    print(faltas_time_b)
+    print(escanteios_time_a)
+    print(escanteios_time_b)
     '''
