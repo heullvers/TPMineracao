@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup
 
 from Enum.Meses import qualMes
 from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto, verificar_se_teve_expulsao, verifica_tempo_gols, verifica_placares_momentaneos
+from classes.Partida import Partida
 import datetime
 
-def coleta_dados(link):
+def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
     page = requests.get(link)
     soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -441,12 +442,12 @@ def coleta_dados(link):
         if(medias[3][2] != '-'):
             jogos_sem_sofrer_gols_time_casa_fora = int(medias[3][2].replace("%",'')) / 100
         else:
-            jogos_sem_sofrer_gols_time_casa_global = float(0)
+            jogos_sem_sofrer_gols_time_casa_fora = float(0)
 
         if(medias[3][3] != '-'):
-            jogos_sem_sofrer_gols_time_casa_em_casa = int(medias[3][3].replace("%",'')) / 100
+            jogos_sem_sofrer_gols_time_casa_global = int(medias[3][3].replace("%",'')) / 100
         else:
-            jogos_sem_sofrer_gols_time_casa_em_casa = float(0)
+            jogos_sem_sofrer_gols_time_casa_global = float(0)
 
 
         if(medias[4][1] != '-'):
@@ -787,10 +788,25 @@ def coleta_dados(link):
         '''
 
         print('Ocorreu expulsão')
+        partida = Partida(nome_campeonato, temporada, pais, rodada,
+            time_dentro, time_fora, resultado_final, gols_mandante, gols_visitante, horario, turno, dia_semana,
+            posicao_atual_time_dentro, posicao_atual_time_fora,
+            ultimo_jogo_casa, segundo_ultimo_jogo_casa, terceiro_ultimo_jogo_casa, quarto_ultimo_jogo_casa, quinto_ultimo_jogo_casa, ultimo_jogo_visitante, segundo_ultimo_jogo_visitante, terceiro_ultimo_jogo_visitante, quarto_ultimo_jogo_visitante, quinto_ultimo_jogo_visitante,
+            media_gols_marcados_por_jogo_time_casa_em_casa, media_gols_marcados_por_jogo_time_casa_fora, media_gols_marcados_por_jogo_time_casa_global, media_gols_sofridos_por_jogo_time_casa_em_casa, media_gols_sofridos_por_jogo_time_casa_fora, media_gols_sofridos_por_jogo_time_casa_global, media_gols_marcados_sofridos_por_jogo_time_casa_em_casa, media_gols_marcados_sofridos_por_jogo_time_casa_fora, media_gols_marcados_sofridos_por_jogo_time_casa_global, jogos_sem_sofrer_gols_time_casa_em_casa, jogos_sem_sofrer_gols_time_casa_fora, jogos_sem_sofrer_gols_time_casa_global, jogos_sem_marcar_gols_time_casa_em_casa, jogos_sem_marcar_gols_time_casa_fora, jogos_sem_marcar_gols_time_casa_global, jogos_com_mais_de_dois_gols_e_meio_time_casa_em_casa, jogos_com_mais_de_dois_gols_e_meio_time_casa_fora, jogos_com_mais_de_dois_gols_e_meio_time_casa_global, jogos_com_menos_de_dois_gols_e_meio_time_casa_em_casa, jogos_com_menos_de_dois_gols_e_meio_time_casa_fora, jogos_com_menos_de_dois_gols_e_meio_time_casa_global,
+            media_gols_marcados_por_jogo_time_visitante_em_casa, media_gols_marcados_por_jogo_time_visitante_fora, media_gols_marcados_por_jogo_time_visitante_global, media_gols_sofridos_por_jogo_time_visitante_em_casa, media_gols_sofridos_por_jogo_time_visitante_fora, media_gols_sofridos_por_jogo_time_visitante_global, media_gols_marcados_sofridos_por_jogo_time_visitante_em_casa, media_gols_marcados_sofridos_por_jogo_time_visitante_fora, media_gols_marcados_sofridos_por_jogo_time_visitante_global, jogos_sem_sofrer_gols_time_visitante_em_casa, jogos_sem_sofrer_gols_time_visitante_fora,jogos_sem_sofrer_gols_time_visitante_global, jogos_sem_marcar_gols_time_visitante_em_casa, jogos_sem_marcar_gols_time_visitante_fora, jogos_sem_marcar_gols_time_visitante_global,jogos_com_mais_de_dois_gols_e_meio_time_visitante_em_casa, jogos_com_mais_de_dois_gols_e_meio_time_visitante_fora, jogos_com_mais_de_dois_gols_e_meio_time_visitante_global, jogos_com_menos_de_dois_gols_e_meio_time_visitante_em_casa, jogos_com_menos_de_dois_gols_e_meio_time_visitante_fora, jogos_com_menos_de_dois_gols_e_meio_time_visitante_global,
+            gols_marcados_time_casa_primeiro_sexto, gols_sofridos_time_casa_primeiro_sexto, gols_marcados_time_casa_segundo_sexto, gols_sofridos_time_casa_segundo_sexto, gols_marcados_time_casa_terceiro_sexto, gols_sofridos_time_casa_terceiro_sexto, gols_marcados_time_casa_quarto_sexto, gols_sofridos_time_casa_quarto_sexto, gols_marcados_time_casa_quinto_sexto, gols_sofridos_time_casa_quinto_sexto, gols_marcados_time_casa_ultimo_sexto, gols_sofridos_time_casa_ultimo_sexto,
+            gols_marcados_time_visitante_primeiro_sexto, gols_sofridos_time_visitante_primeiro_sexto, gols_marcados_time_visitante_segundo_sexto, gols_sofridos_time_visitante_segundo_sexto, gols_marcados_time_visitante_terceiro_sexto, gols_sofridos_time_visitante_terceiro_sexto, gols_marcados_time_visitante_quarto_sexto, gols_sofridos_time_visitante_quarto_sexto, gols_marcados_time_visitante_quinto_sexto, gols_sofridos_time_visitante_quinto_sexto, gols_marcados_time_visitante_ultimo_sexto, gols_sofridos_time_visitante_ultimo_sexto,
+            minuto_primeira_expulsao_time_a, minuto_segunda_expulsao_time_a, minuto_terceira_expulsao_time_a,minuto_quarta_expulsao_time_a, minuto_primeira_expulsao_time_b, minuto_segunda_expulsao_time_b, minuto_terceira_expulsao_time_b, minuto_quarta_expulsao_time_b,
+            placar_momento_expulsao_um, placar_momento_expulsao_dois, placar_momento_expulsao_tres, placar_momento_expulsao_quatro, placar_momento_expulsao_cinco, placar_momento_expulsao_seis, placar_momento_expulsao_sete, placar_momento_expulsao_oito,
+            expulsao_um_cartao, expulsao_dois_cartao, expulsao_tres_cartao, expulsao_quatro_cartao, expulsao_cinco_cartao, expulsao_seis_cartao, expulsao_sete_cartao, expulsao_oito_cartao,
+            quantidade_de_gols_apos_expulsao_um_time_a, quantidade_de_gols_apos_expulsao_um_time_b, quantidade_de_gols_apos_expulsao_dois_time_a, quantidade_de_gols_apos_expulsao_dois_time_b, quantidade_de_gols_apos_expulsao_tres_time_a, quantidade_de_gols_apos_expulsao_tres_time_b, quantidade_de_gols_apos_expulsao_quatro_time_a, quantidade_de_gols_apos_expulsao_quatro_time_b, quantidade_de_gols_apos_expulsao_cinco_time_a, quantidade_de_gols_apos_expulsao_cinco_time_b, quantidade_de_gols_apos_expulsao_seis_time_a, quantidade_de_gols_apos_expulsao_seis_time_b, quantidade_de_gols_apos_expulsao_sete_time_a, quantidade_de_gols_apos_expulsao_sete_time_b, quantidade_de_gols_apos_expulsao_oito_time_a, quantidade_de_gols_apos_expulsao_oito_time_b,
+            qtd_expulsoes_time_a, qtd_expulsoes_time_b)
+
+        print(partida)
     else:
         print('Não ocorreu expulsao')
 
-coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/csa/chapecoense/2989095/1/live')
+#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/csa/chapecoense/2989095/1/live')
 
 '''
 
@@ -819,8 +835,8 @@ coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/
     print(quinto_ultimo_jogo_visitante)
 
     #posição atual na tabela
-    print(posicao_time_dentro)
-    print(posicao_time_fora)
+    print(posicao_atual_time_dentro)
+    print(posicao_atual_time_fora)
 
     #cotação média em casa de apostas pré-jogo
     print(odd_time_casa)

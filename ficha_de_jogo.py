@@ -24,8 +24,6 @@ for option in links_ano:
 for l in links_temporadas:
     link =  link_inicial + l
 
-    print('-------------------------------------------------------------------')
-
     page = requests.get(link)
     soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -76,11 +74,6 @@ for l in links_temporadas:
             rodada_atual = int(rodada_atual.find("span").get_text())
 
 
-            print("CAMPEONATO", nome_campeonato)
-            print("TEMPORADA", temporada)
-            print("RODADA", rodada_atual)
-
-
             #CAPTURAR LINK FICHA DE JOGO DE CADA RODADA
             partidas_da_rodada = soup.find("table", class_="competition-rounds competition-half-padding") #obtém a tabela de partidas
             tabela = partidas_da_rodada.find_all("td") #obtém todo o conteúdo de cada coluna da tabela
@@ -102,14 +95,14 @@ for l in links_temporadas:
                     aux += 1
 
             for link in link_ficha_de_jogo:
-                coleta_dados(link)
+                coleta_dados(link, nome_campeonato, temporada, pais, rodada_atual)
     
     
     '''
     print(nome_campeonato)
     print(temporada)
     print(pais)
-    print(rodada)
+    print(rodada_atual)
     print(link_ficha_de_jogo)
     '''
     ###############################################################
