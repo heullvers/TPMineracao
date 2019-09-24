@@ -11,6 +11,10 @@ class Partida(object):
     placar_momento_expulsao_um, placar_momento_expulsao_dois, placar_momento_expulsao_tres, placar_momento_expulsao_quatro, placar_momento_expulsao_cinco, placar_momento_expulsao_seis, placar_momento_expulsao_sete, placar_momento_expulsao_oito,
     expulsao_um_cartao, expulsao_dois_cartao, expulsao_tres_cartao, expulsao_quatro_cartao, expulsao_cinco_cartao, expulsao_seis_cartao, expulsao_sete_cartao, expulsao_oito_cartao,
     quantidade_de_gols_apos_expulsao_um_time_a, quantidade_de_gols_apos_expulsao_um_time_b, quantidade_de_gols_apos_expulsao_dois_time_a, quantidade_de_gols_apos_expulsao_dois_time_b, quantidade_de_gols_apos_expulsao_tres_time_a, quantidade_de_gols_apos_expulsao_tres_time_b, quantidade_de_gols_apos_expulsao_quatro_time_a, quantidade_de_gols_apos_expulsao_quatro_time_b, quantidade_de_gols_apos_expulsao_cinco_time_a, quantidade_de_gols_apos_expulsao_cinco_time_b, quantidade_de_gols_apos_expulsao_seis_time_a, quantidade_de_gols_apos_expulsao_seis_time_b, quantidade_de_gols_apos_expulsao_sete_time_a, quantidade_de_gols_apos_expulsao_sete_time_b, quantidade_de_gols_apos_expulsao_oito_time_a, quantidade_de_gols_apos_expulsao_oito_time_b,
+    quantidade_de_gols_no_momento_expulsao_um_time_a, quantidade_de_gols_no_momento_expulsao_um_time_b, quantidade_de_gols_no_momento_expulsao_dois_time_a, quantidade_de_gols_no_momento_expulsao_dois_time_b, quantidade_de_gols_no_momento_expulsao_tres_time_a, quantidade_de_gols_no_momento_expulsao_tres_time_b, quantidade_de_gols_no_momento_expulsao_quatro_time_a, quantidade_de_gols_no_momento_expulsao_quatro_time_b, quantidade_de_gols_no_momento_expulsao_cinco_time_a, quantidade_de_gols_no_momento_expulsao_cinco_time_b, quantidade_de_gols_no_momento_expulsao_seis_time_a, quantidade_de_gols_no_momento_expulsao_seis_time_b, quantidade_de_gols_no_momento_expulsao_sete_time_a, quantidade_de_gols_no_momento_expulsao_sete_time_b, quantidade_de_gols_no_momento_expulsao_oito_time_a, quantidade_de_gols_no_momento_expulsao_oito_time_b,
+    intervalo_expulsao_um_v_d_e, intervalo_expulsao_dois_v_d_e, intervalo_expulsao_tres_v_d_e, intervalo_expulsao_quatro_v_d_e, intervalo_expulsao_cinco_v_d_e, intervalo_expulsao_seis_v_d_e, intervalo_expulsao_sete_v_d_e, intervalo_expulsao_oito_v_d_e,
+    momento_expulsao_um_v_d_e, momento_expulsao_dois_v_d_e, momento_expulsao_tres_v_d_e, momento_expulsao_quatro_v_d_e, momento_expulsao_cinco_v_d_e, momento_expulsao_seis_v_d_e, momento_expulsao_sete_v_d_e, momento_expulsao_oito_v_d_e,
+    expulsao_um_m_v, expulsao_dois_m_v, expulsao_tres_m_v, expulsao_quatro_m_v, expulsao_cinco_m_v, expulsao_seis_m_v, expulsao_sete_m_v, expulsao_oito_m_v,
     qtd_expulsoes_time_a, qtd_expulsoes_time_b):
 
         self.nome_campeonato = nome_campeonato
@@ -178,6 +182,64 @@ class Partida(object):
         self.quantidade_de_gols_apos_expulsao_sete_time_visitante = quantidade_de_gols_apos_expulsao_sete_time_b
         self.quantidade_de_gols_apos_expulsao_oito_time_mandante = quantidade_de_gols_apos_expulsao_oito_time_a
         self.quantidade_de_gols_apos_expulsao_oito_time_visitante = quantidade_de_gols_apos_expulsao_oito_time_b
+        ###
+
+        self.quantidade_de_gols_no_momento_expulsao_um_time_mandante = quantidade_de_gols_no_momento_expulsao_um_time_a
+        self.quantidade_de_gols_no_momento_expulsao_um_time_visitante = quantidade_de_gols_no_momento_expulsao_um_time_b
+        self.quantidade_de_gols_no_momento_expulsao_dois_time_mandante = quantidade_de_gols_no_momento_expulsao_um_time_a
+        self.quantidade_de_gols_no_momento_expulsao_dois_time_visitante = quantidade_de_gols_no_momento_expulsao_dois_time_b
+        self.quantidade_de_gols_no_momento_expulsao_tres_time_mandante = quantidade_de_gols_no_momento_expulsao_tres_time_a
+        self.quantidade_de_gols_no_momento_expulsao_tres_time_visitante = quantidade_de_gols_no_momento_expulsao_tres_time_b
+        self.quantidade_de_gols_no_momento_expulsao_quatro_time_mandante = quantidade_de_gols_no_momento_expulsao_quatro_time_a
+        self.quantidade_de_gols_no_momento_expulsao_quatro_time_visitante = quantidade_de_gols_no_momento_expulsao_quatro_time_b
+        self.quantidade_de_gols_no_momento_expulsao_cinco_time_mandante = quantidade_de_gols_no_momento_expulsao_cinco_time_a
+        self.quantidade_de_gols_no_momento_expulsao_cinco_time_visitante = quantidade_de_gols_no_momento_expulsao_cinco_time_b
+        self.quantidade_de_gols_no_momento_expulsao_seis_time_mandante = quantidade_de_gols_no_momento_expulsao_seis_time_a
+        self.quantidade_de_gols_no_momento_expulsao_seis_time_visitante = quantidade_de_gols_no_momento_expulsao_seis_time_b
+        self.quantidade_de_gols_no_momento_expulsao_sete_time_mandante = quantidade_de_gols_no_momento_expulsao_sete_time_a
+        self.quantidade_de_gols_no_momento_expulsao_sete_time_visitante = quantidade_de_gols_no_momento_expulsao_sete_time_b
+        self.quantidade_de_gols_no_momento_expulsao_oito_time_mandante = quantidade_de_gols_no_momento_expulsao_oito_time_a
+        self.quantidade_de_gols_no_momento_expulsao_oito_time_visitante = quantidade_de_gols_no_momento_expulsao_oito_time_b
+
+        ###
+        self.momento_expulsao_um_v_d_e = momento_expulsao_um_v_d_e
+        self.momento_expulsao_dois_v_d_e = momento_expulsao_dois_v_d_e
+        self.momento_expulsao_tres_v_d_e = momento_expulsao_tres_v_d_e
+        self.momento_expulsao_quatro_v_d_e = momento_expulsao_quatro_v_d_e
+        self.momento_expulsao_cinco_v_d_e = momento_expulsao_cinco_v_d_e
+        self.momento_expulsao_seis_v_d_e = momento_expulsao_seis_v_d_e
+        self.momento_expulsao_sete_v_d_e = momento_expulsao_sete_v_d_e
+        self.momento_expulsao_oito_v_d_e = momento_expulsao_oito_v_d_e
+
+        ###
+        self.intervalo_expulsao_um_v_d_e = intervalo_expulsao_um_v_d_e
+        self.intervalo_expulsao_dois_v_d_e = intervalo_expulsao_dois_v_d_e
+        self.intervalo_expulsao_tres_v_d_e = intervalo_expulsao_tres_v_d_e
+        self.intervalo_expulsao_quatro_v_d_e = intervalo_expulsao_quatro_v_d_e
+        self.intervalo_expulsao_cinco_v_d_e = intervalo_expulsao_cinco_v_d_e
+        self.intervalo_expulsao_seis_v_d_e  = intervalo_expulsao_seis_v_d_e 
+        self.intervalo_expulsao_sete_v_d_e  = intervalo_expulsao_sete_v_d_e 
+        self.intervalo_expulsao_oito_v_d_e  = intervalo_expulsao_oito_v_d_e 
+        ###
+
+        self.momento_expulsao_um_v_d_e  = momento_expulsao_um_v_d_e 
+        self.momento_expulsao_dois_v_d_e  = momento_expulsao_dois_v_d_e 
+        self.momento_expulsao_tres_v_d_e  = momento_expulsao_tres_v_d_e 
+        self.momento_expulsao_quatro_v_d_e = momento_expulsao_quatro_v_d_e
+        self.momento_expulsao_cinco_v_d_e = momento_expulsao_cinco_v_d_e
+        self.momento_expulsao_seis_v_d_e  = momento_expulsao_seis_v_d_e 
+        self.momento_expulsao_sete_v_d_e  = momento_expulsao_sete_v_d_e 
+        self.momento_expulsao_oito_v_d_e  = momento_expulsao_oito_v_d_e 
+        ###
+
+        self.expulsao_um_m_v = expulsao_um_m_v
+        self.expulsao_dois_m_v = expulsao_dois_m_v
+        self.expulsao_tres_m_v = expulsao_tres_m_v
+        self.expulsao_quatro_m_v = expulsao_quatro_m_v
+        self.expulsao_cinco_m_v = expulsao_cinco_m_v
+        self.expulsao_seis_m_v = expulsao_seis_m_v
+        self.expulsao_sete_m_v = expulsao_sete_m_v
+        self.expulsao_oito_m_v = expulsao_oito_m_v
 
         ###
         self.qtd_expulsoes_time_mandante = qtd_expulsoes_time_a
