@@ -208,11 +208,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_um_v_d_e = 'Vitoria'
+                    momento_expulsao_um_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_um_v_d_e = 'Derrota'
+                    momento_expulsao_um_v_d_e = 'D'
                 else:
-                    momento_expulsao_um_v_d_e = 'Empate'
+                    momento_expulsao_um_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_um_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_um_time_b = qtd_gols_time_b
@@ -231,11 +231,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_dois_v_d_e = 'Vitoria'
+                    momento_expulsao_dois_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_dois_v_d_e = 'Derrota'
+                    momento_expulsao_dois_v_d_e = 'D'
                 else:
-                    momento_expulsao_dois_v_d_e = 'Empate'
+                    momento_expulsao_dois_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_dois_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_dois_time_b = qtd_gols_time_b
@@ -253,11 +253,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_tres_v_d_e = 'Vitoria'
+                    momento_expulsao_tres_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_tres_v_d_e = 'Derrota'
+                    momento_expulsao_tres_v_d_e = 'D'
                 else:
-                    momento_expulsao_tres_v_d_e = 'Empate'
+                    momento_expulsao_tres_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_tres_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_tres_time_b = qtd_gols_time_b
@@ -275,11 +275,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_quatro_v_d_e = 'Vitoria'
+                    momento_expulsao_quatro_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_quatro_v_d_e = 'Derrota'
+                    momento_expulsao_quatro_v_d_e = 'D'
                 else:
-                    momento_expulsao_quatro_v_d_e = 'Empate'
+                    momento_expulsao_quatro_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_quatro_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_quatro_time_b = qtd_gols_time_b
@@ -297,11 +297,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_cinco_v_d_e = 'Vitoria'
+                    momento_expulsao_cinco_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_cinco_v_d_e = 'Derrota'
+                    momento_expulsao_cinco_v_d_e = 'D'
                 else:
-                    momento_expulsao_cinco_v_d_e = 'Empate'
+                    momento_expulsao_cinco_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_cinco_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_cinco_time_b = qtd_gols_time_b
@@ -318,11 +318,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_seis_v_d_e = 'Vitoria'
+                    momento_expulsao_seis_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_seis_v_d_e = 'Derrota'
+                    momento_expulsao_seis_v_d_e = 'D'
                 else:
-                    momento_expulsao_seis_v_d_e = 'Empate'
+                    momento_expulsao_seis_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_seis_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_seis_time_b = qtd_gols_time_b
@@ -339,11 +339,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_sete_v_d_e = 'Vitoria'
+                    momento_expulsao_sete_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_sete_v_d_e = 'Derrota'
+                    momento_expulsao_sete_v_d_e = 'D'
                 else:
-                    momento_expulsao_sete_v_d_e = 'Empate'
+                    momento_expulsao_sete_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_sete_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_sete_time_b = qtd_gols_time_b
@@ -360,11 +360,11 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
                 qtd_gols_time_b = int(gols[1])
 
                 if(qtd_gols_time_a > qtd_gols_time_b):
-                    momento_expulsao_oito_v_d_e = 'Vitoria'
+                    momento_expulsao_oito_v_d_e = 'V'
                 elif(qtd_gols_time_a < qtd_gols_time_b):
-                    momento_expulsao_oito_v_d_e = 'Derrota'
+                    momento_expulsao_oito_v_d_e = 'D'
                 else:
-                    momento_expulsao_oito_v_d_e = 'Empate'
+                    momento_expulsao_oito_v_d_e = 'E'
 
                 quantidade_de_gols_no_momento_expulsao_oito_time_a = qtd_gols_time_a
                 quantidade_de_gols_no_momento_expulsao_oito_time_b = qtd_gols_time_b
@@ -415,68 +415,68 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
 
         if(placar_momento_expulsao_um):
             if(quantidade_de_gols_apos_expulsao_um_time_a > quantidade_de_gols_apos_expulsao_um_time_b):
-                    intervalo_expulsao_um_v_d_e = 'Vitoria'
+                    intervalo_expulsao_um_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_um_time_a < quantidade_de_gols_apos_expulsao_um_time_b):
-                intervalo_expulsao_um_v_d_e = 'Derrota'
+                intervalo_expulsao_um_v_d_e = 'D'
             else:
-                intervalo_expulsao_um_v_d_e = 'Empate'
+                intervalo_expulsao_um_v_d_e = 'E'
 
         if(placar_momento_expulsao_dois):
             if(quantidade_de_gols_apos_expulsao_dois_time_a > quantidade_de_gols_apos_expulsao_dois_time_b):
-                    intervalo_expulsao_dois_v_d_e = 'Vitoria'
+                    intervalo_expulsao_dois_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_dois_time_a < quantidade_de_gols_apos_expulsao_dois_time_b):
-                intervalo_expulsao_dois_v_d_e = 'Derrota'
+                intervalo_expulsao_dois_v_d_e = 'D'
             else:
-                intervalo_expulsao_dois_v_d_e = 'Empate'
+                intervalo_expulsao_dois_v_d_e = 'E'
 
         
         if(placar_momento_expulsao_tres):
             if(quantidade_de_gols_apos_expulsao_tres_time_a > quantidade_de_gols_apos_expulsao_tres_time_b):
-                    intervalo_expulsao_tres_v_d_e = 'Vitoria'
+                    intervalo_expulsao_tres_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_tres_time_a < quantidade_de_gols_apos_expulsao_tres_time_b):
-                intervalo_expulsao_tres_v_d_e = 'Derrota'
+                intervalo_expulsao_tres_v_d_e = 'D'
             else:
-                intervalo_expulsao_tres_v_d_e = 'Empate'
+                intervalo_expulsao_tres_v_d_e = 'E'
 
         if(placar_momento_expulsao_quatro):
             if(quantidade_de_gols_apos_expulsao_quatro_time_a > quantidade_de_gols_apos_expulsao_quatro_time_b):
-                    intervalo_expulsao_quatro_v_d_e = 'Vitoria'
+                    intervalo_expulsao_quatro_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_quatro_time_a < quantidade_de_gols_apos_expulsao_quatro_time_b):
-                intervalo_expulsao_quatro_v_d_e = 'Derrota'
+                intervalo_expulsao_quatro_v_d_e = 'D'
             else:
-                intervalo_expulsao_quatro_v_d_e = 'Empate'
+                intervalo_expulsao_quatro_v_d_e = 'E'
 
         if(placar_momento_expulsao_cinco):
             if(quantidade_de_gols_apos_expulsao_cinco_time_a > quantidade_de_gols_apos_expulsao_cinco_time_b):
-                    intervalo_expulsao_cinco_v_d_e = 'Vitoria'
+                    intervalo_expulsao_cinco_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_cinco_time_a < quantidade_de_gols_apos_expulsao_cinco_time_b):
-                intervalo_expulsao_cinco_v_d_e = 'Derrota'
+                intervalo_expulsao_cinco_v_d_e = 'D'
             else:
-                intervalo_expulsao_cinco_v_d_e = 'Empate'
+                intervalo_expulsao_cinco_v_d_e = 'E'
 
         if(placar_momento_expulsao_seis):
             if(quantidade_de_gols_apos_expulsao_seis_time_a > quantidade_de_gols_apos_expulsao_seis_time_b):
-                    intervalo_expulsao_seis_v_d_e = 'Vitoria'
+                    intervalo_expulsao_seis_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_seis_time_a < quantidade_de_gols_apos_expulsao_seis_time_b):
-                intervalo_expulsao_seis_v_d_e = 'Derrota'
+                intervalo_expulsao_seis_v_d_e = 'D'
             else:
-                intervalo_expulsao_seis_v_d_e = 'Empate'
+                intervalo_expulsao_seis_v_d_e = 'E'
 
         if(placar_momento_expulsao_sete):
             if(quantidade_de_gols_apos_expulsao_sete_time_a > quantidade_de_gols_apos_expulsao_sete_time_b):
-                    intervalo_expulsao_sete_v_d_e = 'Vitoria'
+                    intervalo_expulsao_sete_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_sete_time_a < quantidade_de_gols_apos_expulsao_sete_time_b):
-                intervalo_expulsao_sete_v_d_e = 'Derrota'
+                intervalo_expulsao_sete_v_d_e = 'D'
             else:
-                intervalo_expulsao_sete_v_d_e = 'Empate'
+                intervalo_expulsao_sete_v_d_e = 'E'
         
         if(placar_momento_expulsao_oito):
             if(quantidade_de_gols_apos_expulsao_oito_time_a > quantidade_de_gols_apos_expulsao_oito_time_b):
-                    intervalo_expulsao_oito_v_d_e = 'Vitoria'
+                    intervalo_expulsao_oito_v_d_e = 'V'
             elif(quantidade_de_gols_apos_expulsao_oito_time_a < quantidade_de_gols_apos_expulsao_oito_time_b):
-                intervalo_expulsao_oito_v_d_e = 'Derrota'
+                intervalo_expulsao_oito_v_d_e = 'D'
             else:
-                intervalo_expulsao_oito_v_d_e = 'Empate'
+                intervalo_expulsao_oito_v_d_e = 'E'
 
         
 
@@ -521,6 +521,87 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
 
         ##Dia da semana
         dia_semana= dia_da_semana(ano,mes,dia)
+
+        estatisticas = soup.find("table", class_="match_stats_center")
+
+        ##Posse de bola
+        posse = estatisticas.find("tr", class_="possession")
+        if(posse):
+            posse_time_a = (int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))) / 100
+            posse_time_b = (int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))) / 100
+        else:
+            posse_time_a = None
+            posse_time_b = None
+
+        ##Chutes a gol
+        chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
+        if(chutes_a_gol):
+            chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
+            chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            chutes_a_gol_time_a = None
+            chutes_a_gol_time_b = None
+
+        ##Chutes fora
+        #shots_off_target
+        chutes_fora = estatisticas.find("tr", class_="shots_off_target")
+        if(chutes_fora):
+            chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
+            chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            chutes_fora_time_a = None
+            chutes_fora_time_b = None
+
+        ##Ataques
+        #attacks
+        ataques = estatisticas.find("tr", class_="attacks")
+        if(ataques):
+            ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
+            ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            ataques_time_a = None
+            ataques_time_b = None
+
+        ##Ataques perigosos
+        #dangerous_attacks
+        ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
+        if(ataques_perigosos):
+            ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
+            ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            ataques_perigosos_time_a = None
+            ataques_perigosos_time_b = None
+
+        ##Impedimentos
+        #offsides
+        impedimentos = estatisticas.find("tr", class_="offsides")
+        if(impedimentos):
+            impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
+            impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            impedimentos_time_a = None
+            impedimentos_time_b = None
+
+        ##Faltas
+        #fouls
+        faltas = estatisticas.find("tr", class_="fouls")
+        if(faltas):
+            faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
+            faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            faltas_time_a = None
+            faltas_time_b = None
+
+        ##Escanteios
+        #corners
+        escanteios = estatisticas.find("tr", class_="corners")
+        if(escanteios):
+            escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
+            escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
+        else:
+            escanteios_time_a = None
+            escanteios_time_b = None
+
 
         ##Estatisticas outra aba
         link = link.replace("live", "prelive")
@@ -952,92 +1033,19 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
         gols_sofridos_time_visitante_quinto_sexto = lista_momento_gols[4][1]
         gols_sofridos_time_visitante_ultimo_sexto = lista_momento_gols[5][1]
 
-        '''
-        estatisticas = soup.find("table", class_="match_stats_center")
+        ###
 
-        ##Posse de bola
-        posse = estatisticas.find("tr", class_="possession")
-        if(posse):
-            posse_time_a = (int(posse.find("td", class_="stat_value_number_team_A").get_text().strip().replace("%",''))) / 100
-            posse_time_b = (int(posse.find("td", class_="stat_value_number_team_B").get_text().strip().replace("%",''))) / 100
+        if(gols_mandante > gols_visitante):
+            resultado_final_v_d_e = 'V'
+        elif(gols_mandante < gols_visitante):
+            resultado_final_v_d_e = 'D'
         else:
-            posse_time_a = None
-            posse_time_b = None
+            resultado_final_v_d_e = 'E'
 
-        ##Chutes a gol
-        chutes_a_gol = estatisticas.find("tr", class_="shots_on_target")
-        if(chutes_a_gol):
-            chutes_a_gol_time_a = int(chutes_a_gol.find("td", class_="stat_value_number_team_A").get_text().strip())
-            chutes_a_gol_time_b = int(chutes_a_gol.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            chutes_a_gol_time_a = None
-            chutes_a_gol_time_b = None
-
-        ##Chutes fora
-        #shots_off_target
-        chutes_fora = estatisticas.find("tr", class_="shots_off_target")
-        if(chutes_fora):
-            chutes_fora_time_a = int(chutes_fora.find("td", class_="stat_value_number_team_A").get_text().strip())
-            chutes_fora_time_b = int(chutes_fora.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            chutes_fora_time_a = None
-            chutes_fora_time_b = None
-
-        ##Ataques
-        #attacks
-        ataques = estatisticas.find("tr", class_="attacks")
-        if(ataques):
-            ataques_time_a = int(ataques.find("td", class_="stat_value_number_team_A").get_text().strip())
-            ataques_time_b = int(ataques.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            ataques_time_a = None
-            ataques_time_b = None
-
-        ##Ataques perigosos
-        #dangerous_attacks
-        ataques_perigosos = estatisticas.find("tr", class_="dangerous_attacks")
-        if(ataques_perigosos):
-            ataques_perigosos_time_a = int(ataques_perigosos.find("td", class_="stat_value_number_team_A").get_text().strip())
-            ataques_perigosos_time_b = int(ataques_perigosos.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            ataques_perigosos_time_a = None
-            ataques_perigosos_time_b = None
-
-        ##Impedimentos
-        #offsides
-        impedimentos = estatisticas.find("tr", class_="offsides")
-        if(impedimentos):
-            impedimentos_time_a = int(impedimentos.find("td", class_="stat_value_number_team_A").get_text().strip())
-            impedimentos_time_b = int(impedimentos.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            impedimentos_time_a = None
-            impedimentos_time_b = None
-
-        ##Faltas
-        #fouls
-        faltas = estatisticas.find("tr", class_="fouls")
-        if(faltas):
-            faltas_time_a = int(faltas.find("td", class_="stat_value_number_team_A").get_text().strip())
-            faltas_time_b = int(faltas.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            faltas_time_a = None
-            faltas_time_b = None
-
-        ##Escanteios
-        #corners
-        escanteios = estatisticas.find("tr", class_="corners")
-        if(escanteios):
-            escanteios_time_a = int(escanteios.find("td", class_="stat_value_number_team_A").get_text().strip())
-            escanteios_time_b = int(escanteios.find("td", class_="stat_value_number_team_B").get_text().strip())
-        else:
-            escanteios_time_a = None
-            escanteios_time_b = None
-
-        '''
 
         print('Ocorreu expulsão')
         partida = Partida(nome_campeonato, temporada, pais, rodada,
-            time_dentro, time_fora, resultado_final, gols_mandante, gols_visitante, horario, turno, dia_semana,
+            time_dentro, time_fora, resultado_final, resultado_final_v_d_e, gols_mandante, gols_visitante, horario, turno, dia_semana,
             posicao_atual_time_dentro, posicao_atual_time_fora,
             ultimo_jogo_casa, segundo_ultimo_jogo_casa, terceiro_ultimo_jogo_casa, quarto_ultimo_jogo_casa, quinto_ultimo_jogo_casa, ultimo_jogo_visitante, segundo_ultimo_jogo_visitante, terceiro_ultimo_jogo_visitante, quarto_ultimo_jogo_visitante, quinto_ultimo_jogo_visitante,
             media_gols_marcados_por_jogo_time_casa_em_casa, media_gols_marcados_por_jogo_time_casa_fora, media_gols_marcados_por_jogo_time_casa_global, media_gols_sofridos_por_jogo_time_casa_em_casa, media_gols_sofridos_por_jogo_time_casa_fora, media_gols_sofridos_por_jogo_time_casa_global, media_gols_marcados_sofridos_por_jogo_time_casa_em_casa, media_gols_marcados_sofridos_por_jogo_time_casa_fora, media_gols_marcados_sofridos_por_jogo_time_casa_global, jogos_sem_sofrer_gols_time_casa_em_casa, jogos_sem_sofrer_gols_time_casa_fora, jogos_sem_sofrer_gols_time_casa_global, jogos_sem_marcar_gols_time_casa_em_casa, jogos_sem_marcar_gols_time_casa_fora, jogos_sem_marcar_gols_time_casa_global, jogos_com_mais_de_dois_gols_e_meio_time_casa_em_casa, jogos_com_mais_de_dois_gols_e_meio_time_casa_fora, jogos_com_mais_de_dois_gols_e_meio_time_casa_global, jogos_com_menos_de_dois_gols_e_meio_time_casa_em_casa, jogos_com_menos_de_dois_gols_e_meio_time_casa_fora, jogos_com_menos_de_dois_gols_e_meio_time_casa_global,
@@ -1052,31 +1060,14 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
             momento_expulsao_um_v_d_e, momento_expulsao_dois_v_d_e, momento_expulsao_tres_v_d_e, momento_expulsao_quatro_v_d_e, momento_expulsao_cinco_v_d_e, momento_expulsao_seis_v_d_e, momento_expulsao_sete_v_d_e, momento_expulsao_oito_v_d_e,
             intervalo_expulsao_um_v_d_e, intervalo_expulsao_dois_v_d_e, intervalo_expulsao_tres_v_d_e, intervalo_expulsao_quatro_v_d_e, intervalo_expulsao_cinco_v_d_e, intervalo_expulsao_seis_v_d_e, intervalo_expulsao_sete_v_d_e, intervalo_expulsao_oito_v_d_e,
             expulsao_um_m_v, expulsao_dois_m_v, expulsao_tres_m_v, expulsao_quatro_m_v, expulsao_cinco_m_v, expulsao_seis_m_v, expulsao_sete_m_v, expulsao_oito_m_v,
-            qtd_expulsoes_time_a, qtd_expulsoes_time_b)
+            qtd_expulsoes_time_a, qtd_expulsoes_time_b,
+            posse_time_a, posse_time_b, chutes_a_gol_time_a, chutes_a_gol_time_b, chutes_fora_time_a, chutes_fora_time_b, ataques_time_a, ataques_time_b, ataques_perigosos_time_a, ataques_perigosos_time_b, impedimentos_time_a, impedimentos_time_b, faltas_time_a, faltas_time_b, escanteios_time_a, escanteios_time_b)
 
 
         
         print(partida)
         print(partida.time_mandante,'x',partida.time_visitante)
-
-        print(partida.placar_momento_expulsao_um)
-        print(partida.expulsao_um_cartao_vd_ou_sa)
-        print(partida.expulsao_um_m_v)
-
-        print(partida.placar_momento_expulsao_dois)
-        print(partida.expulsao_dois_cartao_vd_ou_sa)
-        print(partida.expulsao_dois_m_v)
-        
-        print(partida.placar_momento_expulsao_tres)
-        print(partida.expulsao_tres_cartao_vd_ou_sa)
-        print(partida.expulsao_tres_m_v)
-        
-
-        # print(partida.placar_momento_expulsao_quatro)
-        # print(partida.placar_momento_expulsao_cinco)
-        # print(partida.placar_momento_expulsao_seis)
-        # print(partida.placar_momento_expulsao_sete)
-        # print(partida.placar_momento_expulsao_oito)
+        print(partida.posse_time_mandante)
 
     else:
         print('Não ocorreu expulsao')
