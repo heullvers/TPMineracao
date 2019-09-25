@@ -1066,12 +1066,16 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
 
         #####ESCREVER ARQUIVO
         print(partida.time_mandante,'x',partida.time_visitante)
+<<<<<<< HEAD
         print('Temporada', partida.temporada)
         print('Rodada', partida.rodada)
         
 
         return partida
 
+=======
+        print(partida.posse_time_mandante)
+>>>>>>> 34e5d832443421de725e19c8e7d807c64556f646
 
     else:
         print('Não ocorreu expulsao')
