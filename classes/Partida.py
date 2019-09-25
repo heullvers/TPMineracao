@@ -60,7 +60,7 @@ class Partida(object):
         self.media_gols_sofridos_por_jogo_time_mandante_fora = media_gols_sofridos_por_jogo_time_casa_fora 
         self.media_gols_sofridos_por_jogo_time_mandante_global = media_gols_sofridos_por_jogo_time_casa_global
         
-        self.media_gols_marcados_sofridos_por_jogo_time_mandante_em_casa = media_gols_marcados_sofridos_por_jogo_time_casa_em_casa
+        self.media_gols_marcados_e_sofridos_por_jogo_time_mandante_em_casa = media_gols_marcados_sofridos_por_jogo_time_casa_em_casa
         self.media_gols_marcados_e_sofridos_por_jogo_time_mandante_fora= media_gols_marcados_sofridos_por_jogo_time_casa_fora
         self.media_gols_marcados_e_sofridos_por_jogo_time_mandante_global = media_gols_marcados_sofridos_por_jogo_time_casa_global
         
@@ -89,7 +89,7 @@ class Partida(object):
         self.media_gols_sofridos_por_jogo_time_visitante_fora = media_gols_sofridos_por_jogo_time_visitante_fora 
         self.media_gols_sofridos_por_jogo_time_visitante_global = media_gols_sofridos_por_jogo_time_visitante_global
         
-        self.media_gols_marcados_sofridos_por_jogo_time_visitante_em_casa = media_gols_marcados_sofridos_por_jogo_time_visitante_em_casa
+        self.media_gols_marcados_e_sofridos_por_jogo_time_visitante_em_casa = media_gols_marcados_sofridos_por_jogo_time_visitante_em_casa
         self.media_gols_marcados_e_sofridos_por_jogo_time_visitante_fora= media_gols_marcados_sofridos_por_jogo_time_visitante_fora
         self.media_gols_marcados_e_sofridos_por_jogo_time_visitante_global = media_gols_marcados_sofridos_por_jogo_time_visitante_global
         

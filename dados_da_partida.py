@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from enum.Meses import qualMes
+from Enum.Meses import qualMes
 from funcoes.funcoes import dia_da_semana, identificar_minuto_expulsao_segundo_amarelo, identificar_minuto_expulsao_vermelho_direto, verificar_se_teve_expulsao, verifica_tempo_gols, verifica_placares_momentaneos
 from classes.Partida import Partida
 import datetime
@@ -1063,14 +1063,21 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
             qtd_expulsoes_time_a, qtd_expulsoes_time_b,
             posse_time_a, posse_time_b, chutes_a_gol_time_a, chutes_a_gol_time_b, chutes_fora_time_a, chutes_fora_time_b, ataques_time_a, ataques_time_b, ataques_perigosos_time_a, ataques_perigosos_time_b, impedimentos_time_a, impedimentos_time_b, faltas_time_a, faltas_time_b, escanteios_time_a, escanteios_time_b)
 
-        print(partida)
+
+        #####ESCREVER ARQUIVO
         print(partida.time_mandante,'x',partida.time_visitante)
-        print(partida.posse_time_mandante)
+        print('Temporada', partida.temporada)
+        print('Rodada', partida.rodada)
+        
+
+        return partida
+
 
     else:
         print('Não ocorreu expulsao')
+        return False
 
-coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/avai/cruzeiro/2989053/1/live', 'Bielo', '2053', 'Bielorussia', 10)
+#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/avai/cruzeiro/2989053/1/live', 'Bielo', '2053', 'Bielorussia', 10)
 
 '''
 
