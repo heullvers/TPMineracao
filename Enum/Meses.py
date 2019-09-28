@@ -7,8 +7,8 @@ def qualMes(mes):
         return Meses.janeiro
     elif(mes == 'fevereiro'):
         return Meses.fevereiro
-    elif(mes == 'marco'):
-        return Meses.marco
+    elif(mes == 'março'):
+        return Meses.março
     elif(mes == 'abril'):
         return Meses.abril
     elif(mes == 'maio'):

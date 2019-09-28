@@ -8,7 +8,7 @@ from classes.Partida import Partida
 
 
 ##escrita arquivo
-f = open('Jupyter/campeonato_brasileiro22.csv', 'w')
+f = open('Jupyter/campeonato_italiano_5.csv', 'w')
 try:
     writer = csv.writer(f)
     writer.writerow(( 'nome_campeonato', 'temporada', 'pais', 'rodada',
@@ -30,7 +30,7 @@ try:
     'qtd_expulsoes_time_a', 'qtd_expulsoes_time_b',
     'posse_time_a', 'posse_time_b', 'chutes_a_gol_time_a', 'chutes_a_gol_time_b', 'chutes_fora_time_a', 'chutes_fora_time_b', 'ataques_time_a', 'ataques_time_b', 'ataques_perigosos_time_a', 'ataques_perigosos_time_b', 'impedimentos_time_a', 'impedimentos_time_b', 'faltas_time_a', 'faltas_time_b', 'escanteios_time_a', 'escanteios_time_b'))
 
-    link_inicial = "https://www.academiadasapostasbrasil.com/stats/competition/brasil-stats/26"
+    link_inicial = "https://www.academiadasapostasbrasil.com/stats/competition/italia-stats/13"
 
     page = requests.get(link_inicial)
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -43,6 +43,10 @@ try:
     for option in links_ano:
         link = '/' + option.get("value")
         links_temporadas.append(link)
+    
+
+    ##EM CASO DE ERROS DURANTE A COLETA AJUSTAR AQUI AS TEMPORADAS
+    del links_temporadas[0:12]
 
     for l in links_temporadas:
         link =  link_inicial + l
@@ -87,14 +91,26 @@ try:
                 rodadas_do_ano.append(link_rodada)
 
             ###############################################################
-
+            ##EM CASO DE ERROS DURANTE A COLETA AJUSTAR AQUI AS RODADAS
+            
+            if(l == "/2272"):
+                
+                del rodadas_do_ano[0:28]
+                print("deletei")
+            else:
+                print("nao deletei")
+            
+            
             for rodada in rodadas_do_ano:
 
                 page = requests.get(rodada)
                 soup = BeautifulSoup(page.content, 'html.parser')
 
                 rodada_atual = soup.find("td", id="week-gr")
-                rodada_atual = int(rodada_atual.find("span").get_text())
+                if(rodada_atual):
+                    rodada_atual = int(rodada_atual.find("span").get_text())
+                else:
+                    rodada_atual = None
 
 
                 #CAPTURAR LINK FICHA DE JOGO DE CADA RODADA

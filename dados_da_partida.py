@@ -140,7 +140,7 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
         quantidade_de_gols_no_momento_expulsao_um_time_a = None
         quantidade_de_gols_no_momento_expulsao_um_time_b = None
 
-        quantidade_de_gols_apos_expulsao_dois_time_a = None
+        quantidade_de_gols_no_momento_expulsao_dois_time_a = None
         quantidade_de_gols_no_momento_expulsao_dois_time_b = None
 
         quantidade_de_gols_no_momento_expulsao_tres_time_a = None
@@ -478,13 +478,6 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
             else:
                 intervalo_expulsao_oito_v_d_e = 'E'
 
-        
-
-        
-
-
-        
-        
 
         ### Descobrir time mandante e visitante
         time_dentro = dados_gerais_da_partida[0].find_all("a")
@@ -492,6 +485,8 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
 
         time_dentro = time_dentro[1].get_text().strip() #TIME MANDANTE
         time_fora = time_fora[1].get_text().strip() #TIME VISITANTE
+
+        print(time_dentro,'x',time_fora)
 
         ####
 
@@ -509,8 +504,20 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
         horas = int(horario[0])
         minutos = int(horario[1])
 
-        horario = datetime.datetime(ano, mes, dia, horas, minutos) ##Horario
+        #dia_semana = None
+        #turno = None
 
+        #if((not ano) or (not mes) or (not dia) or (not horas) or (not minutos)):
+        #horario = None
+        #else:
+        #print('ano', ano)
+        #print('mes', mes)
+        #print('dia', dia)
+        #print('horas', horas)
+        #print('minutos', minutos)
+        horario = datetime.datetime(ano, mes, dia, horas, minutos) ##Horario
+        ##Dia da semana
+        dia_semana= dia_da_semana(ano,mes,dia)
         ##Turno do jogo
         if((horas >= 6) and (horas <= 12)):
             turno = "Dia"
@@ -518,9 +525,6 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
             turno = "Tarde"
         else:
             turno = "Noite"
-
-        ##Dia da semana
-        dia_semana= dia_da_semana(ano,mes,dia)
 
         estatisticas = soup.find("table", class_="match_stats_center")
 
@@ -667,10 +671,16 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
         ##Identificar posição atual na tabela do time mandante e visitante
         classificacao = soup.find("table", class_="results competition-rounds competition-half-padding")
         posicao_atual_time_dentro = classificacao.find("tr", {"style":"background-color: #CDDFF0"})
-        posicao_atual_time_dentro = int(posicao_atual_time_dentro.find("td").get_text().strip())
+        if(posicao_atual_time_dentro):
+            posicao_atual_time_dentro = int(posicao_atual_time_dentro.find("td").get_text().strip())
+        else:
+            posicao_atual_time_dentro = None
 
         posicao_atual_time_fora = classificacao.find("tr",{"style":"background-color: #FFE0A6"})
-        posicao_atual_time_fora = int(posicao_atual_time_fora.find("td").get_text().strip())
+        if(posicao_atual_time_fora):
+            posicao_atual_time_fora = int(posicao_atual_time_fora.find("td").get_text().strip())
+        else:
+            posicao_atual_time_fora = None
 
 
         ##Identificar odds pré-jogo
@@ -1056,32 +1066,25 @@ def coleta_dados(link, nome_campeonato, temporada, pais, rodada):
             placar_momento_expulsao_um, placar_momento_expulsao_dois, placar_momento_expulsao_tres, placar_momento_expulsao_quatro, placar_momento_expulsao_cinco, placar_momento_expulsao_seis, placar_momento_expulsao_sete, placar_momento_expulsao_oito,
             expulsao_um_cartao, expulsao_dois_cartao, expulsao_tres_cartao, expulsao_quatro_cartao, expulsao_cinco_cartao, expulsao_seis_cartao, expulsao_sete_cartao, expulsao_oito_cartao,
             quantidade_de_gols_apos_expulsao_um_time_a, quantidade_de_gols_apos_expulsao_um_time_b, quantidade_de_gols_apos_expulsao_dois_time_a, quantidade_de_gols_apos_expulsao_dois_time_b, quantidade_de_gols_apos_expulsao_tres_time_a, quantidade_de_gols_apos_expulsao_tres_time_b, quantidade_de_gols_apos_expulsao_quatro_time_a, quantidade_de_gols_apos_expulsao_quatro_time_b, quantidade_de_gols_apos_expulsao_cinco_time_a, quantidade_de_gols_apos_expulsao_cinco_time_b, quantidade_de_gols_apos_expulsao_seis_time_a, quantidade_de_gols_apos_expulsao_seis_time_b, quantidade_de_gols_apos_expulsao_sete_time_a, quantidade_de_gols_apos_expulsao_sete_time_b, quantidade_de_gols_apos_expulsao_oito_time_a, quantidade_de_gols_apos_expulsao_oito_time_b,
-            quantidade_de_gols_no_momento_expulsao_um_time_a, quantidade_de_gols_no_momento_expulsao_um_time_b, quantidade_de_gols_apos_expulsao_dois_time_a, quantidade_de_gols_no_momento_expulsao_dois_time_b, quantidade_de_gols_no_momento_expulsao_tres_time_a, quantidade_de_gols_no_momento_expulsao_tres_time_b, quantidade_de_gols_no_momento_expulsao_quatro_time_a, quantidade_de_gols_no_momento_expulsao_quatro_time_b, quantidade_de_gols_no_momento_expulsao_cinco_time_a, quantidade_de_gols_no_momento_expulsao_cinco_time_b, quantidade_de_gols_no_momento_expulsao_seis_time_a, quantidade_de_gols_no_momento_expulsao_seis_time_b, quantidade_de_gols_no_momento_expulsao_sete_time_a, quantidade_de_gols_no_momento_expulsao_sete_time_b, quantidade_de_gols_no_momento_expulsao_oito_time_a, quantidade_de_gols_no_momento_expulsao_oito_time_b,
+            quantidade_de_gols_no_momento_expulsao_um_time_a, quantidade_de_gols_no_momento_expulsao_um_time_b, quantidade_de_gols_no_momento_expulsao_dois_time_a, quantidade_de_gols_no_momento_expulsao_dois_time_b, quantidade_de_gols_no_momento_expulsao_tres_time_a, quantidade_de_gols_no_momento_expulsao_tres_time_b, quantidade_de_gols_no_momento_expulsao_quatro_time_a, quantidade_de_gols_no_momento_expulsao_quatro_time_b, quantidade_de_gols_no_momento_expulsao_cinco_time_a, quantidade_de_gols_no_momento_expulsao_cinco_time_b, quantidade_de_gols_no_momento_expulsao_seis_time_a, quantidade_de_gols_no_momento_expulsao_seis_time_b, quantidade_de_gols_no_momento_expulsao_sete_time_a, quantidade_de_gols_no_momento_expulsao_sete_time_b, quantidade_de_gols_no_momento_expulsao_oito_time_a, quantidade_de_gols_no_momento_expulsao_oito_time_b,
             momento_expulsao_um_v_d_e, momento_expulsao_dois_v_d_e, momento_expulsao_tres_v_d_e, momento_expulsao_quatro_v_d_e, momento_expulsao_cinco_v_d_e, momento_expulsao_seis_v_d_e, momento_expulsao_sete_v_d_e, momento_expulsao_oito_v_d_e,
             intervalo_expulsao_um_v_d_e, intervalo_expulsao_dois_v_d_e, intervalo_expulsao_tres_v_d_e, intervalo_expulsao_quatro_v_d_e, intervalo_expulsao_cinco_v_d_e, intervalo_expulsao_seis_v_d_e, intervalo_expulsao_sete_v_d_e, intervalo_expulsao_oito_v_d_e,
             expulsao_um_m_v, expulsao_dois_m_v, expulsao_tres_m_v, expulsao_quatro_m_v, expulsao_cinco_m_v, expulsao_seis_m_v, expulsao_sete_m_v, expulsao_oito_m_v,
             qtd_expulsoes_time_a, qtd_expulsoes_time_b,
             posse_time_a, posse_time_b, chutes_a_gol_time_a, chutes_a_gol_time_b, chutes_fora_time_a, chutes_fora_time_b, ataques_time_a, ataques_time_b, ataques_perigosos_time_a, ataques_perigosos_time_b, impedimentos_time_a, impedimentos_time_b, faltas_time_a, faltas_time_b, escanteios_time_a, escanteios_time_b)
-
-
-        #####ESCREVER ARQUIVO
-        print(partida.time_mandante,'x',partida.time_visitante)
-<<<<<<< HEAD
+        
+        print('Campeonato', partida.nome_campeonato)
         print('Temporada', partida.temporada)
         print('Rodada', partida.rodada)
-        
 
         return partida
 
-=======
-        print(partida.posse_time_mandante)
->>>>>>> 34e5d832443421de725e19c8e7d807c64556f646
 
     else:
         print('Não ocorreu expulsao')
         return False
 
-#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/brasil-stats/brasileirao-serie-a/avai/cruzeiro/2989053/1/live', 'Bielo', '2053', 'Bielorussia', 10)
+#coleta_dados('https://www.academiadasapostasbrasil.com/stats/match/colombia-stats/primera-division/santa-fe/tolima/2380632/1/live', 'Bielo', '2053', 'Bielorussia', 10)
 
 '''
 
