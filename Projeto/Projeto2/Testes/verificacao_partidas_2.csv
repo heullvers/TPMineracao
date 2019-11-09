@@ -1,0 +1,10 @@
+posicao_time_dentro,posicao_time_fora,media_gols_marcados_por_jogo_time_casa_em_casa,media_gols_sofridos_por_jogo_time_casa_em_casa,media_gols_sofridos_por_jogo_time_visitante_fora,gols_marcados_time_casa_segundo_sexto,gols_marcados_time_visitante_segundo_sexto,gols_sofridos_time_visitante_quinto_sexto,quantidade_de_gols_no_momento_expulsao_um_time_a,minuto_expulsao_um,minuto_expulsao_dois,diferenca_gols_expulsao_um,diferenca_gols_expulsao_dois,expulsao_dois_m_v_Visitante,quarto_ultimo_jogo_visitante_V,momento_expulsao_um_v_d_e_V,expulsao_um_m_v_Mandante,momento_expulsao_dois_v_d_e_D,momento_expulsao_dois_v_d_e_E,momento_expulsao_dois_v_d_e_V,resultado_final_v_d_e
+21,18,0.25,0.75,1.25,0,0,1,0,87,False,-1,False,0,0,0,1,0,0,0,D
+12,2,2.33,1.33,0.25,1,0,0,0,46,False,0,False,0,1,0,1,0,0,0,D
+22,19,1.25,0.75,0.75,0,0,0,1,91,False,1,False,0,0,1,1,0,0,0,V
+14,16,0.75,0.5,1.75,0,0,2,0,54,False,0,False,0,0,0,1,0,0,0,D
+23,24,0.5,1.5,1.5,0,0,0,1,51,81,-1,0,0,0,0,1,0,1,0,D
+2,18,1.75,1.75,1.75,2,0,0,0,22,False,0,False,0,1,0,1,0,0,0,D
+15,1,0.0,1.25,0.0,0,0,0,0,93,False,-1,False,0,1,0,0,0,0,0,D
+16,6,0.33,0.67,0.67,0,0,0,0,45,False,-1,False,0,1,0,0,0,0,0,D
+13,2,2.0,1.0,0.33,1,0,0,3,94,False,1,False,0,1,1,0,0,0,0,V
